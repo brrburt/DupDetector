@@ -12,7 +12,10 @@ public class DupDetector {
 
     public static void main(String[] args) throws Exception
     {
-        System.out.println("hello world");
+        CountTokens t = new CountTokens();
+        t.Counting();
+        t.Display();
+        
     }
 
 
