@@ -1,8 +1,10 @@
 *.class
-.project
+*.project
 .classpath
 .vscode
 build
 .settings
 .gradle
 bin
+package-info.java
+module-info.java

@@ -101,18 +101,22 @@ public class CommandLine {
 	}
 	
 	/**
-	 * Read command line arguments and create Files types from
-	 * arguments.
+	 * Read command line arguments passed from main and create Files 
+	 * types from arguments.
 	 *  
+	 * @parameter args command line arguments passed from main
 	 * @post File objects added to sourceFiles list and pFile set
 	 *  from command line arguments
 	 */
-	public void parseParameters() {
-		
+	public void parseParameters(String[] args) {
+		/* The extensions list will be replaced by given source file 
+		   extensions from propertiesFile once that unit is ready 
+		*/
+		String[] extensions = {".cpp", ".c", ".h", ".hpp", ".H"};
 	}
 	
 	/**
-	 * called by parseParameters, take command line argument and searches 
+	 * Called by parseParameters, take command line argument and searches 
 	 * for source files to add to list of source files.
 	 * 
 	 * @parameter argument command line argument string
@@ -126,7 +130,11 @@ public class CommandLine {
 		Vector<File> allFiles = this.searchDirectories(sourceDir);
 		
 		// trim list to only include source files
+		/* The extensions list will be replaced by given source file 
+		   extensions from propertiesFile once that unit is ready 
+		*/
 		String[] extensions = {".cpp", ".c", ".h", ".hpp", ".H"};
+		
 		for( File file: allFiles) {
 			for( String ext: extensions) {
 				if( file.getName().endsWith(ext)) {
@@ -147,6 +155,8 @@ public class CommandLine {
 	public Vector<File> searchDirectories(File argument) {
 		
 		Vector<File> foundFiles = new Vector<File>();
+		Vector<File> tempFiles = new Vector<File>();
+		
 		// Find all files within given directory and sub directory
 		if( argument.isDirectory()) {
 			String[] foundDir = argument.list();
@@ -154,7 +164,10 @@ public class CommandLine {
 				String absPath = argument.getAbsolutePath() + '/' + path;
 				File dir = new File(absPath);
 				if(dir.isDirectory()) {
-					foundFiles =  this.searchDirectories(dir);
+					tempFiles =  this.searchDirectories(dir);
+					for( File file: tempFiles) {
+						foundFiles.add(file);
+					}
 				}
 			}
 			for(File file: argument.listFiles()) {
