@@ -1,7 +1,11 @@
 package edu.odu.cs.cs350;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
+import java.io.File;
+import java.io.FilenameFilter;
 
 /*
 // @author cs_alee035
@@ -13,6 +17,18 @@ public class CommandLine {
 	private List<Files> sourceFiles;
 	private Files pFile;
 	private Refactoring refactor;
+	
+	/* Constructors */
+	
+	/**
+	 * Create Empty CommandLine object with no source files, 
+	 * properties file, or Refactoring object
+	 */
+	CommandLine() {
+		sourceFiles = new ArrayList<Files>();
+		pFile = new Files();
+		refactor = new Refactoring();
+	}
 	
 	/* Getters and Setters */
 	
@@ -26,10 +42,15 @@ public class CommandLine {
 	
 	/**
 	 * Add source file to list
+	 * @pre check if file is not currently in sourceFiles
 	 * @param file source file to add to sourceFiles
+	 * 
+	 * @post new source file is added to sourceFiles
 	 */
 	public void addSourceFile(Files file) {
-		
+		if (!(sourceFiles.contains(file))) {
+			sourceFiles.add(file);
+		}
 	}
 	
 	/**
@@ -90,8 +111,59 @@ public class CommandLine {
 		
 	}
 	
-	public void findSourceFiles() {
+	/**
+	 * called by parseParameters, take command line argument and searches 
+	 * for source files to add to list of source files.
+	 * 
+	 * @parameter argument command line argument string
+	 * 
+	 * @post recursively retrieves all source files within given directory
+	 * and adds them to sourceFiles
+	 */
+	public void findSourceFiles(String argument) {
+		File sourceDir = new File(argument);
+		// Create collection of all files found
+		Vector<File> allFiles = this.searchDirectories(sourceDir);
 		
+		// trim list to only include source files
+		String[] extensions = {".cpp", ".c", ".h", ".hpp", ".H"};
+		for( File file: allFiles) {
+			for( String ext: extensions) {
+				if( file.getName().endsWith(ext)) {
+					Files source = new Files(file.getAbsolutePath());
+					addSourceFile(source);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Recursively searches directory structure to find all files
+	 * 
+	 * @param argument
+	 * @return foundFiles array of found Files within directory
+	 * and sub-directories
+	 */
+	public Vector<File> searchDirectories(File argument) {
+		
+		Vector<File> foundFiles = new Vector<File>();
+		// Find all files within given directory and sub directory
+		if( argument.isDirectory()) {
+			String[] foundDir = argument.list();
+			for(String path: foundDir) {
+				String absPath = argument.getAbsolutePath() + '/' + path;
+				File dir = new File(absPath);
+				if(dir.isDirectory()) {
+					foundFiles =  this.searchDirectories(dir);
+				}
+			}
+			for(File file: argument.listFiles()) {
+				foundFiles.add(file);
+			}
+			return foundFiles;
+		}
+		
+		return foundFiles;
 	}
 	
 	/**
