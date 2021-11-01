@@ -40,6 +40,7 @@ public class UnitTestFileTokens {
 					+ "examples";
 		
 		File exampleDir = new File(dir);
+		Files fakeFile = new Files("fakePath");
 		
 		files.add(exampleDir.getAbsolutePath() + File.separator + "example.h");
 		files.add(exampleDir.getAbsolutePath() + File.separator + "example.cpp");
@@ -48,7 +49,8 @@ public class UnitTestFileTokens {
 		// Sort strings in files (NULL means 'natural ordering', which will sort this alphabetically)
 		files.sort(null);
 		
-		cli.findSourceFiles(dir);
+		
+		cli.findSourceFiles(dir, fakeFile);
 		
 		for(Files file: cli.getSourceFiles()) {
 			assertTrue(files.contains(file.getPath()));
