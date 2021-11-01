@@ -17,6 +17,7 @@ public class CommandLine {
 	private List<Files> sourceFiles;
 	private Files pFile;
 	private Refactoring refactor;
+	private CountTokens tokenizer;
 	
 	/* Constructors */
 	
@@ -28,6 +29,7 @@ public class CommandLine {
 		sourceFiles = new ArrayList<Files>();
 		pFile = new Files();
 		refactor = new Refactoring();
+		tokenizer = new CountTokens();
 	}
 	
 	/* Getters and Setters */
@@ -87,7 +89,13 @@ public class CommandLine {
 	 * @post Refactoring suggestions printed to command line
 	 */
 	public void printSuggestions() {
-		
+		// Section 1 of refactoring suggestions
+		System.out.println("Files scanned:");
+		for(Files file: this.getSourceFiles()) {
+			tokenizer.setText(file.contentToString(file.getPath()));
+			tokenizer.Counting();
+			System.out.println("    " + file.getPath() + ", " + tokenizer.getNumOfTokens());	
+		}
 	}
 	
 	/**

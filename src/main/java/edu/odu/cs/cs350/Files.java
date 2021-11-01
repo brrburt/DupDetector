@@ -12,6 +12,10 @@ import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Scanner; // Import the Scanner class to read text files
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 
 public class Files {
 	
@@ -83,6 +87,11 @@ public class Files {
 	{
 		return sourceFiles; 
 	}
+	
+	public String getPath() {
+		return this.path;
+	}
+	
 	/**
 	 * Read the Property File, See if file had a line that contains CppExtensions 
 	 * If so store that line has string 
@@ -115,6 +124,35 @@ public class Files {
 	}
 	
 	}
+	
+	/**
+	 * Read content from file and return it as a string so it can be tokenized
+	 * 
+	 * @param path path of the source file
+	 * @return content string containing all content from file
+	 */
+	public String contentToString(String path) {
+		FileReader fileread;
+		String content = "";
+		String curr = "";
+				
+		try {
+			fileread = new FileReader(path);
+			BufferedReader bufreader = new BufferedReader(fileread);
+			while ((curr = bufreader.readLine()) != null) {
+				content += curr;
+			}
+			bufreader.close();
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return content;
+	}
+	
+	
 	public boolean equals(Object obj) 
 	{
 		if (obj.hashCode() == this.hashCode())
