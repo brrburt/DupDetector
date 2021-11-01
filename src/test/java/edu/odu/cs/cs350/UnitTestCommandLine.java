@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Vector;
 
 
@@ -21,6 +23,17 @@ import java.util.Vector;
  */
 
 public class UnitTestCommandLine {
+	/*
+	@Test
+	public void testConstructor() {
+		CommandLine cli = new CommandLine();
+		Refactoring ref = new Refactoring();
+		Files file = new Files();
+		
+		assertTrue(cli.getSourceFiles().isEmpty());
+		assertTrue(cli.getRefactor().equals(ref));
+		assertThat(cli.getPropertiesFile(), is(file));
+	} */
 	
 	@Test
 	public void testFindSourceFiles() throws IOException {
@@ -28,6 +41,10 @@ public class UnitTestCommandLine {
 		Vector<File> testFiles = new Vector<File>();
 		Vector<File> fakeFiles = new Vector<File>();
 		Vector<Files> filesList = new Vector<Files>();
+		File pFile = new File("src/test/resources/properties.ini");
+		List<File> sourceFiles = new ArrayList<File>();
+		Files p = new Files(pFile,sourceFiles);
+		//p.ReadPropertiesFile();
 		
 		// Create test directories and files
 		String  dir = "unitTestCommandLine";
@@ -56,7 +73,7 @@ public class UnitTestCommandLine {
 		}
 		// run findSourceFiles and check if all files are found
 		CommandLine cli = new CommandLine();
-		cli.findSourceFiles(dir);
+		cli.findSourceFiles(dir, p);
 		for( Files file: filesList) {
 			assertTrue(cli.getSourceFiles().contains(file));
 		}
@@ -72,7 +89,27 @@ public class UnitTestCommandLine {
 		}
 		testDir2.delete();
 		testDir3.delete();
-		testDir.delete();
+		testDir.delete();	
+	}
+	
+	@Test
+	public void testAddSourceFiles() {
+		Files source1 = new Files("path1.cpp");
+		Files source2 = new Files("path2.h");
+		Files source3 = new Files("path3.hpp");
+		CommandLine cli = new CommandLine();
+		cli.addSourceFile(source1);
 		
+		assertTrue(cli.getSourceFiles().contains(source1));
+		assertThat(cli.getSourceFiles().size(), is(1));
+		
+		cli.addSourceFile(source2);
+		cli.addSourceFile(source3);
+		assertTrue(cli.getSourceFiles().contains(source2));
+		assertTrue(cli.getSourceFiles().contains(source3));
+		assertThat(cli.getSourceFiles().size(), is(3));
+		
+		cli.addSourceFile(source3);
+		assertThat(cli.getSourceFiles().size(), is(3));
 	}
 }
