@@ -41,10 +41,9 @@ public class UnitTestCommandLine {
 		Vector<File> testFiles = new Vector<File>();
 		Vector<File> fakeFiles = new Vector<File>();
 		Vector<Files> filesList = new Vector<Files>();
-		File pFile = new File("src/test/resources/properties.ini");
-		List<File> sourceFiles = new ArrayList<File>();
-		Files p = new Files(pFile,sourceFiles);
-		//p.ReadPropertiesFile();
+		
+		FilesStub stubPFile = new FilesStub();
+		
 		
 		// Create test directories and files
 		String  dir = "unitTestCommandLine";
@@ -73,7 +72,9 @@ public class UnitTestCommandLine {
 		}
 		// run findSourceFiles and check if all files are found
 		CommandLine cli = new CommandLine();
-		cli.findSourceFiles(dir, p);
+		cli.setPropertiesFile(stubPFile);
+		
+		cli.findSourceFiles(dir);
 		for( Files file: filesList) {
 			assertTrue(cli.getSourceFiles().contains(file));
 		}

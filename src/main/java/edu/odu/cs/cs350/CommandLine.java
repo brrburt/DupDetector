@@ -1,6 +1,7 @@
 package edu.odu.cs.cs350;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Vector;
 
@@ -122,9 +123,7 @@ public class CommandLine {
 		   extensions from propertiesFile once that unit is ready 
 		   Default is .cpp, .h
 		*/
-		String[] extensions = {".cpp", ".c", ".h", ".hpp", ".H"};
 	}
-	
 	/**
 	 * Called by parseParameters, take command line argument and searches 
 	 * for source files to add to list of source files.
@@ -135,25 +134,19 @@ public class CommandLine {
 	 * @post recursively retrieves all source files within given directory
 	 * and adds them to sourceFiles
 	 */
-	public void findSourceFiles(String argument, Files pFile) {
+	public void findSourceFiles(String argument) {
 		File sourceDir = new File(argument);
 		// Create collection of all files found
 		Vector<File> allFiles = this.searchDirectories(sourceDir);
 		
 		// trim list to only include source files
-		/* The extensions list will be replaced by given source file 
-		   extensions from propertiesFile once that unit is ready 
-		   Default is .cpp, .h
-		
 		List<String> extensions = new ArrayList<String>();
-		for( String ext: pFile.getFileExtensions()) {
-			extensions.add(ext);
-		} */
 		
-		// This implementation of the file extensions will be replaced
-		// by the one above, as soon as the ReadPropertiesFile() function
-		// is working from the Files Class
-		String[] extensions = {".cpp", ".h", ".hpp", ".H", ".c"};
+		for( String ext: pFile.getFileExtensions() )
+	    {
+			extensions.add(ext);
+		} 
+		
 		for( File file: allFiles) {
 			for( String ext: extensions) {
 				if( file.getName().endsWith(ext)) {

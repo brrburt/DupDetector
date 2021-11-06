@@ -102,7 +102,7 @@ public class Files {
 	
 	public void ReadPropertiesFile() throws FileNotFoundException
 	{
-		Scanner scan = new Scanner(propertiesFile); /// more proper would be getPropertyFile instead of propertyFile
+		Scanner scan = new Scanner(this.getpropertiesFile()); /// more proper would be getPropertyFile instead of propertyFile
 		String temp=""; 
 		while (scan.hasNextLine())    /// issue in this while loop goes for ever 
 		{
@@ -114,15 +114,14 @@ public class Files {
 		
 		scan.close();
 	
-	String[] tokens = temp.split(" ");
-	for (int i = 0; i < tokens.length; i++)
-	{
-		if (tokens[i].startsWith("."))
+		String[] tokens = temp.split(" ");
+		for (int i = 0; i < tokens.length; i++)
 		{
-			fileExtensions.add(tokens[i]);
+			if (tokens[i].startsWith("."))
+			{
+				fileExtensions.add(tokens[i]);
+			}
 		}
-	}
-	
 	}
 	
 	/**

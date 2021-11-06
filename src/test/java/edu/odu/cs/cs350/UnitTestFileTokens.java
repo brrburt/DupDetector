@@ -40,7 +40,6 @@ public class UnitTestFileTokens {
 					+ "examples";
 		
 		File exampleDir = new File(dir);
-		Files fakeFile = new Files("fakePath");
 		
 		files.add(exampleDir.getAbsolutePath() + File.separator + "example.h");
 		files.add(exampleDir.getAbsolutePath() + File.separator + "example.cpp");
@@ -50,7 +49,7 @@ public class UnitTestFileTokens {
 		files.sort(null);
 		
 		
-		cli.findSourceFiles(dir, fakeFile);
+		cli.findSourceFiles(dir);
 		
 		for(Files file: cli.getSourceFiles()) {
 			assertTrue(files.contains(file.getPath()));
