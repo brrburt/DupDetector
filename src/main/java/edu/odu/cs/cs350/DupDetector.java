@@ -12,9 +12,11 @@ public class DupDetector {
 
     public static void main(String[] args) throws Exception
     {
-        CountTokens t = new CountTokens();
+        /*CountTokens t = new CountTokens();
         t.Counting();
-        t.Display();
+        t.Display();*/
+
+       
         
     }
 
