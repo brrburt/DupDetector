@@ -16,9 +16,8 @@ public class DupDetector {
         t.Counting();
         t.Display();*/
 
-       
-        
-    }
 
+
+    }
 
 }
