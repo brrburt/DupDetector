@@ -299,7 +299,7 @@ public class Token
         while ((t = getToken()).tokenType != TokenName.END_OF_INPUT) 
         {
             value ++;
-        System.out.println(t);
+        //System.out.println(t);
 
         }
 
