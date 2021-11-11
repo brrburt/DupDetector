@@ -3,6 +3,10 @@ package edu.odu.cs.cs350;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+// author Gerhea Reed 
+// cs_greed007
+*/
 
 
 public class Token 
@@ -14,6 +18,7 @@ public class Token
     private char chr;
     private String s;
     private int position;
+    private int numOfTokens;
     
     public String value;
 
@@ -26,9 +31,10 @@ public class Token
         this.position =0;
         this.s = " ";
         this.value ="";
+        this.numOfTokens =0;
         
     }
-    public Token( TokenName token, String theText, int line, int column)
+    public Token(TokenName token, String theText, int line, int column)
     {
         this.tokenType = token;
         this.text = theText;
@@ -54,6 +60,16 @@ public class Token
     public final TokenName getTokenType()
     {
         return tokenType;
+    }
+
+    public int getNumOfTokens()
+    {
+        return numOfTokens;
+    }
+
+    public void setNumOfTokens(int numOf)
+    {
+        this.numOfTokens= numOf;
     }
     public int hashCode()
     {
@@ -107,7 +123,7 @@ public class Token
         this.keywords.put("while", TokenName.KEYWORD_WHILE);
  
     }
-    Token follow(char expect, TokenName ifyes, TokenName ifno, int line, int pos)
+   Token follow(char expect, TokenName ifyes, TokenName ifno, int line, int pos)
     {
         if (getNextChar() == expect) {
             getNextChar();
@@ -154,7 +170,7 @@ public class Token
             }
             result += this.chr;
         }
-        getNextChar();
+       getNextChar();
         return new Token(TokenName.STRING, result, line, pos);
     }
 
@@ -216,7 +232,7 @@ public class Token
             error(line, pos, String.format("identifer_or_integer unrecopgnized character: (%d) %c", (int)this.chr, this.chr));
         }
  
-        if (Character.isDigit(text.charAt(0))) {
+       if (Character.isDigit(text.charAt(0))) {
             if (!is_number) {
                 error(line, pos, String.format("invaslid number: %s", text));
             }
@@ -227,7 +243,7 @@ public class Token
             return new Token(this.keywords.get(text), "", line, pos);
         }
         return new Token(TokenName.IDENTIFIER, text, line, pos);
-    }
+   }
 
     //Modified code to read C++ characters
 
@@ -268,6 +284,7 @@ public class Token
             case '?': getNextChar(); return new Token(TokenName.QUESTION_MARK, "", line, pos);
             case '~': getNextChar(); return new Token(TokenName.DELETE_SYMBOL, "", line, pos);
             case '&': getNextChar(); return new Token(TokenName.OP_ADD, "", line, pos);
+            case '@': getNextChar(); return new Token(TokenName.OP_AT, "", line, pos);
 
  
             default: return identifier_or_integer(line, pos);
@@ -292,18 +309,20 @@ public class Token
         return this.chr;
     }
 
+
     void printTokens() 
     {
         Token t;
-        int value =0;
+
         while ((t = getToken()).tokenType != TokenName.END_OF_INPUT) 
         {
-            value ++;
+            numOfTokens++;
+          
         //System.out.println(t);
 
         }
 
-        System.out.println("Total number of tokens is " + value);
+        System.out.println("Total number of tokens is " + getNumOfTokens());
         
 
     }

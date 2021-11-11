@@ -1,12 +1,12 @@
 package edu.odu.cs.cs350;
 
 import java.io.BufferedReader;
-import java.io.File;
+/*import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
+import java.util.Scanner;*/
 
 public class DupDetector {
 
@@ -16,6 +16,7 @@ public class DupDetector {
         t.Counting();
         t.Display();*/
 
+<<<<<<< HEAD
         /**
          * Check for errors before going further
          * 
@@ -77,6 +78,11 @@ public class DupDetector {
     	catch (NumberFormatException e) {
     		return false;
     	}
+=======
+
+        
+
+>>>>>>> c6a7331 (tokenName)
     }
     
 
