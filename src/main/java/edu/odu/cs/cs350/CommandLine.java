@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 
 /*
 // @author cs_alee035
@@ -135,19 +136,29 @@ public class CommandLine {
 	/**
 	 * Read command line arguments passed from main and create Files 
 	 * types from arguments.
+	 * @throws IOException 
 	 *  
 	 * @parameter args command line arguments passed from main
 	 * @post File objects added to sourceFiles list and pFile set
 	 *  from command line arguments
 	 */
-	public void parseParameters(String[] args) {
+	public void parseParameters(String[] args) throws IOException {
 		
 		// Get nSuggestions
 		this.setNSuggestions(Integer.parseInt(args[0]));
 		
 		// Get property file
+		File pFile = new File(args[1]);
+		propertiesFile propFile = new propertiesFile(pFile);
+		this.setPropertiesFile(propFile);
+		this.getPropertiesFile().readPropertyFile();
 		
 		// Get files/directories
+		for (int argsIndex = 2; argsIndex < args.length; argsIndex++)
+		{
+			this.findSourceFiles(args[argsIndex]);
+		}
+		
 	}
 	/**
 	 * Called by parseParameters, take command line argument and searches 
@@ -170,7 +181,6 @@ public class CommandLine {
 		
 		for( File file: allFiles) {
 			for( String ext: extensions) {
-				System.out.println(ext);
 				if( file.getName().endsWith(ext)) {
 					Files source = new Files(file.getAbsolutePath());
 					addSourceFile(source);
@@ -208,6 +218,9 @@ public class CommandLine {
 				foundFiles.add(file);
 			}
 			return foundFiles;
+		}
+		else {
+			foundFiles.add(argument);
 		}
 		
 		return foundFiles;

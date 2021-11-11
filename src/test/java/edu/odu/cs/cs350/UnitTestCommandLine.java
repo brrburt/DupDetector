@@ -105,7 +105,7 @@ public class UnitTestCommandLine {
 	
 	@Test
 	public void testSetPropertiesFile() {
-		File pFile = new File("/bin/unitTestCommandLine/properties.ini");
+		File pFile = new File("");
 		propertiesFile propFile = new propertiesFile(pFile);
 		
 		CommandLine cli = new CommandLine();
@@ -133,5 +133,46 @@ public class UnitTestCommandLine {
 		cli.setTokenizer(tokens);
 		
 		assertTrue(cli.getTokenizer().equals(tokens));
+	}
+	
+	@Test 
+	public void testParseParameters() throws IOException {
+		String[] args = {"8", "src/test/java/edu/odu/cs/cs350/resources/unitTestCommandLine/properties.ini",
+		                 "src/test/java/edu/odu/cs/cs350/resources/newFakeSource.C", 
+		                 "src/test/java/edu/odu/cs/cs350/resources/unitTestCommandLine"};
+		File pFile = new File("src/test/java/edu/odu/cs/cs350/resources/unitTestCommandLine/properties.ini");
+		propertiesFile propFile = new propertiesFile(pFile);
+		propFile.readPropertyFile();
+		String  dir = "src/test/java/edu/odu/cs/cs350/resources/unitTestCommandLine";
+		String dir2 = dir + "/Headers";
+		String dir3 = dir + "/Other";
+		File testDir = new File(dir);
+		File testDir2 = new File(dir2);
+		File testDir3 = new File(dir3);
+		
+		Vector<File> testFiles = new Vector<File>();
+		Vector<Files> filesList = new Vector<Files>();
+		
+		testFiles.add(new File(testDir.getAbsolutePath() + "/source1.cpp"));
+		testFiles.add(new File(testDir.getAbsolutePath() + "/source2.C"));
+		testFiles.add(new File(testDir2.getAbsolutePath() + "/header1.h"));
+		testFiles.add(new File(testDir2.getAbsolutePath() + "/header.H"));
+		testFiles.add(new File(testDir3.getAbsolutePath() + "/other.hpp"));
+		testFiles.add(new File(args[2]));
+		
+		for( File file: testFiles) {
+			filesList.add(new Files(file.getAbsolutePath()));
+		}
+		
+		CommandLine cli = new CommandLine();
+		
+		cli.parseParameters(args);
+		
+		assertThat(cli.getNSuggestions(), is(8));
+		assertTrue(cli.getPropertiesFile().equals(propFile));
+		for( Files file: filesList) {
+			assertTrue(cli.getSourceFiles().contains(file));
+		}
+		
 	}
 }

@@ -113,7 +113,7 @@ public class UnitTestInvocation extends DupDetector {
 	}
 	
 	@Test
-	public void testNSuggestions()
+	public void testNSuggestions() throws IOException
 	{
 		// Test that nSuggestions parameter from invocation is stored
 		
