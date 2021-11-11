@@ -32,6 +32,7 @@ public class CommandLine {
 		pFile = new Files();
 		refactor = new Refactoring();
 		tokenizer = new CountTokens();
+		nSuggestions = 5;
 	}
 	
 	/* Getters and Setters */
@@ -78,8 +79,12 @@ public class CommandLine {
 	 * retrieve the Refactoring object
 	 * @return refactor Refactoring object
 	 */
-	public Refactoring getRefactor( ) {
+	public Refactoring getRefactoring( ) {
 		return refactor;
+	}
+	
+	public void setRefactoring(Refactoring refactoring) {
+		refactor = refactoring;
 	}
 	
 	public void setNSuggestions(int number) {
@@ -88,6 +93,14 @@ public class CommandLine {
 	
 	public int getNSuggestions() {
 		return nSuggestions;
+	}
+	
+	public void setTokenizer(CountTokens tokens) {
+		tokenizer = tokens;
+	}
+	
+	public CountTokens getTokenizer() {
+		return tokenizer;
 	}
 	
 	/* Command Line Interface operations*/
@@ -128,10 +141,6 @@ public class CommandLine {
 	 *  from command line arguments
 	 */
 	public void parseParameters(String[] args) {
-		/* The extensions list will be replaced by given source file 
-		   extensions from propertiesFile once that unit is ready 
-		   Default is .cpp, .h
-		*/
 		
 		// Get nSuggestions
 		this.setNSuggestions(Integer.parseInt(args[0]));
@@ -145,7 +154,6 @@ public class CommandLine {
 	 * for source files to add to list of source files.
 	 * 
 	 * @parameter argument file path String
-	 * @parameter pFile Files containing source file extensions
 	 * 
 	 * @post recursively retrieves all source files within given directory
 	 * and adds them to sourceFiles
@@ -176,7 +184,7 @@ public class CommandLine {
 	/**
 	 * Recursively searches directory structure to find all files
 	 * 
-	 * @param argument
+	 * @param argument File/directory to search
 	 * @return foundFiles array of found Files within directory
 	 * and sub-directories
 	 */

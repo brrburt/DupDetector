@@ -37,6 +37,7 @@ public class Files {
 		propertiesFile = new File("");
 		fileExtensions = new ArrayList<String>();
 		sourceFiles = new ArrayList<File>(); 
+		path = new String();
 		
 	}
 	/**

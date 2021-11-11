@@ -1,13 +1,15 @@
 package edu.odu.cs.cs350;
 
-public class Refactoring {
-	
+
+
+public class RefactoringStub {
+
 	private int improvement;
 	private int refactorRow;
 	private int refactorColumn;
 	private String fileName; 
 	
-	Refactoring() {
+	RefactoringStub() {
 		improvement = 0;
 		refactorRow = 0;
 		refactorColumn = 0;
@@ -25,7 +27,7 @@ public class Refactoring {
 	}
 	
 	/**
-	 * Renders the Refactoring object as a string containing all fields
+	 * Renders the RefactoringStub object as a string containing all fields
 	 * 
 	 */
 	@Override
@@ -36,9 +38,9 @@ public class Refactoring {
 	}
 	
 	/**
-	 * Returns the hashCode for this Refactoring
+	 * Returns the hashCode for this RefactoringStub
 	 * 
-	 * @returns hashCode integer for Refactoring
+	 * @returns hashCode integer for RefactoringStub
 	 */
 	@Override
 	public int hashCode() {

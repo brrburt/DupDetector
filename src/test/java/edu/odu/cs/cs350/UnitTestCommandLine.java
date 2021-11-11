@@ -23,17 +23,21 @@ import java.util.Vector;
  */
 
 public class UnitTestCommandLine {
-	/*
+	
 	@Test
 	public void testConstructor() {
 		CommandLine cli = new CommandLine();
 		Refactoring ref = new Refactoring();
 		Files file = new Files();
+		CountTokens tokens = new CountTokens();
+		int suggestions = 5;
 		
 		assertTrue(cli.getSourceFiles().isEmpty());
-		assertTrue(cli.getRefactor().equals(ref));
-		assertThat(cli.getPropertiesFile(), is(file));
-	} */
+		assertTrue(cli.getRefactoring().equals(ref));
+		assertTrue(cli.getPropertiesFile().equals(file));
+		assertThat(cli.getNSuggestions(), is(suggestions));
+		assertTrue(cli.getTokenizer().equals(tokens));
+		} 
 	
 	@Test
 	public void testFindSourceFiles() throws IOException {
@@ -45,8 +49,8 @@ public class UnitTestCommandLine {
 		FilesStub stubPFile = new FilesStub();
 		
 		
-		// Create test directories and files
-		String  dir = "unitTestCommandLine";
+		// Create test directories and files lists
+		String  dir = "bin/unitTestCommandLine";
 		String dir2 = dir + "/Headers";
 		String dir3 = dir + "/Other";
 		File testDir = new File(dir);
@@ -60,16 +64,11 @@ public class UnitTestCommandLine {
 		fakeFiles.add(new File(testDir3.getAbsolutePath() + "/fake.txt"));
 		fakeFiles.add(new File(testDir.getAbsolutePath() + "/properties.ini"));
 		fakeFiles.add(new File(testDir2.getAbsolutePath() + "/trickFile.cpp.o"));
-		testDir.mkdir();
-		testDir2.mkdir();
-		testDir3.mkdir();
+		
 		for( File file: testFiles) {
-			file.createNewFile();
 			filesList.add(new Files(file.getAbsolutePath()));
 		}
-		for( File file: fakeFiles) {
-			file.createNewFile();
-		}
+
 		// run findSourceFiles and check if all files are found
 		CommandLine cli = new CommandLine();
 		cli.setPropertiesFile(stubPFile);
@@ -80,17 +79,6 @@ public class UnitTestCommandLine {
 		}
 		// check size of container to see if extra files were added
 		assertThat(cli.getSourceFiles().size(), is(5));
-		
-		// sanitize 
-		for(File file: testFiles) {
-			file.delete();
-		}
-		for(File file: fakeFiles) {
-			file.delete();
-		}
-		testDir2.delete();
-		testDir3.delete();
-		testDir.delete();	
 	}
 	
 	@Test
@@ -112,5 +100,36 @@ public class UnitTestCommandLine {
 		
 		cli.addSourceFile(source3);
 		assertThat(cli.getSourceFiles().size(), is(3));
+	}
+	
+	@Test
+	public void testSetPropertiesFile() {
+		Files propFile = new Files("/bin/unitTestCommandLine/properties.ini");
+		
+		CommandLine cli = new CommandLine();
+		cli.setPropertiesFile(propFile);
+		
+		assertTrue(cli.getPropertiesFile().equals(propFile));
+	}
+	
+	@Test
+	public void testSetRefactor() {
+		Refactoring testRefactor = new Refactoring();
+		
+		
+		CommandLine cli = new CommandLine();
+		cli.setRefactoring(testRefactor);
+		
+		assertTrue(cli.getRefactoring().equals(testRefactor));
+	}
+	
+	@Test
+	public void testSetTokenizer() {
+		CountTokens tokens = new CountTokens();
+		
+		CommandLine cli = new CommandLine();
+		cli.setTokenizer(tokens);
+		
+		assertTrue(cli.getTokenizer().equals(tokens));
 	}
 }
