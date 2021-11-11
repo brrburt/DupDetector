@@ -16,7 +16,7 @@ import java.io.FilenameFilter;
 public class CommandLine {
 	
 	private List<Files> sourceFiles;
-	private Files pFile;
+	private propertiesFile pFile;
 	private Refactoring refactor;
 	private CountTokens tokenizer;
 	private int nSuggestions;
@@ -29,7 +29,7 @@ public class CommandLine {
 	 */
 	CommandLine() {
 		sourceFiles = new ArrayList<Files>();
-		pFile = new Files();
+		pFile = new propertiesFile();
 		refactor = new Refactoring();
 		tokenizer = new CountTokens();
 		nSuggestions = 5;
@@ -62,7 +62,7 @@ public class CommandLine {
 	 *  retrieve properties file
 	 * @return pFile the properties file 
 	 */
-	public Files getPropertiesFile() {
+	public propertiesFile getPropertiesFile() {
 		return pFile;
 	}
 	
@@ -71,7 +71,7 @@ public class CommandLine {
 	 *  
 	 *  @post set pFile as properties file
 	 */
-	public void setPropertiesFile(Files propFile) {
+	public void setPropertiesFile(propertiesFile propFile) {
 		pFile = propFile;
 	}
 	
@@ -166,13 +166,11 @@ public class CommandLine {
 		// trim list to only include source files
 		List<String> extensions = new ArrayList<String>();
 		
-		for( String ext: pFile.getFileExtensions() )
-	    {
-			extensions.add(ext);
-		} 
+		extensions = getPropertiesFile().getFileExtensions();
 		
 		for( File file: allFiles) {
 			for( String ext: extensions) {
+				System.out.println(ext);
 				if( file.getName().endsWith(ext)) {
 					Files source = new Files(file.getAbsolutePath());
 					addSourceFile(source);
