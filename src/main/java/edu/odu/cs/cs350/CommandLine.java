@@ -19,6 +19,7 @@ public class CommandLine {
 	private Files pFile;
 	private Refactoring refactor;
 	private CountTokens tokenizer;
+	private int nSuggestions;
 	
 	/* Constructors */
 	
@@ -81,6 +82,14 @@ public class CommandLine {
 		return refactor;
 	}
 	
+	public void setNSuggestions(int number) {
+		nSuggestions = number;
+	}
+	
+	public int getNSuggestions() {
+		return nSuggestions;
+	}
+	
 	/* Command Line Interface operations*/
 	
 	/**
@@ -123,6 +132,13 @@ public class CommandLine {
 		   extensions from propertiesFile once that unit is ready 
 		   Default is .cpp, .h
 		*/
+		
+		// Get nSuggestions
+		this.setNSuggestions(Integer.parseInt(args[0]));
+		
+		// Get property file
+		
+		// Get files/directories
 	}
 	/**
 	 * Called by parseParameters, take command line argument and searches 
