@@ -10,6 +10,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/*
+ * @author cs_juman004
+ * 
+ */
+
 public class propertiesFile 
 {
 	private File propertiesFile; 
@@ -17,6 +22,14 @@ public class propertiesFile
 	private String minSequnces;
 	private String maxSubs;
 	
+	/* Constructors */
+	
+	/**
+	 * Create Empty propertiesFile object with an empty property file, empty fileExt list,
+	 * empty minSeq string, and empty maxSub string. Keep in mind that if this constructor and there exist no file "properties.ini" 
+	 * then one will be created in the project directory 
+	 * 
+	 */
 	public propertiesFile() 
 	{
 		propertiesFile = new File("properties.ini");
@@ -24,6 +37,14 @@ public class propertiesFile
 		minSequnces = "";
 		maxSubs = ""; 
 	}
+	
+	 /**
+     * Creates a properties file with a userDefined property file, empty fileExt list, 
+     * empty minSeq string, and empty maxSub string 
+     * 
+     * @param property File (this input should be accesible from CL ADT)
+     *    
+     */
 	public propertiesFile(File pFile)
 	{
 		propertiesFile = pFile;
@@ -31,51 +52,124 @@ public class propertiesFile
 		minSequnces = "";
 		maxSubs = "";
 	}
+	
+	/**
+     * Retrieve the property file of this object, as type File 
+     * 
+     * @return propertyFile
+     */
+	
+			/* Getters */
 	public File getpropertiesFile()
 	{
 		return propertiesFile;
 	}
+	
+	/**
+     * Retrieve the File Extensions of PropFile , as a List of Stringss
+     * 
+     * @return fileExtensions 
+     */
 	public List<String> getFileExtensions()
 	{
 		return fileExtensions;
 	}
+	
+	/**
+     * Retrieve the number of MinSequces
+     * 
+     * @return minSequnces as a string 
+     */
 	public String getminSequnces()
 	{
 		return minSequnces;
 		
 	}
+	
+	/**
+     * Retrieve the number of MaxSubs
+     * 
+     * @return MaxSubs as a string  
+     */
 	public String getmaxSubs()
 	{
 		return maxSubs;
 	}
+	
+			/* Setters */
+	
+	/**
+     * Set a new propertyFile if necessary
+     * 
+     * @param the path to a Property File
+     *  
+     */
+	
 	
 	public void setPropertyFile(String path)
 	{
 		propertiesFile = new File(path);
 		
 	}
-	// used to be ArrayList
+	
+	/**
+     * Set a new fileExt list if necessary
+     * 
+     * @param a list of strings 
+     *  
+     */
+	
+	
 	public void setfileExtensions (List<String> ext)
 	{
 		fileExtensions = ext; 
 	}
+	
+	/**
+     * Set minSequnces 
+     * 
+     * @param minSequnces String 
+     *  
+     */
+	
 	public void setminSequnces(String min)
 	{
 		minSequnces = min;
 		
 	}
+	/**
+     * Set maxDubuplicats  
+     * 
+     * @param maxDubuplicate string 
+     *  
+     */
 	public void setmaxDubs(String max)
 	{
 		maxSubs = max;
 		
 	}
+		/* General Functions */
+	/**
+     * Adds a file extension to the list of File Extension 
+     * 
+     * @param an extension expressed as a string 
+     *  
+     */
 	public void addExt (String extension)
 	{
 		if (!(fileExtensions.contains(extension)))
 		fileExtensions.add(extension);
 		
 	}
-	
+	/**
+     * Reads the Property File. Looks for the allowed Properties: CppExtensions,MinSequenceLength, and MaxSubstitutions. 
+     * Ensures that the property is in the file and contains a value that is not empty. If so get those values and update ADT 
+     * Else update data members to corresponding defaults values.
+     *  
+     * 
+     * @throws IOException If File cannot be read
+     *  
+     */
 	
 	public void readPropertyFile() throws IOException 
 	{
@@ -115,6 +209,10 @@ public class propertiesFile
 				{
 				setminSequnces(temp);
 				}
+				else 
+				{
+					setminSequnces(minDef);
+				}
 			}
 			else 
 			{
@@ -127,6 +225,10 @@ public class propertiesFile
 				{
 				setmaxDubs(temp);
 				}
+				else 
+				{
+					setmaxDubs(maxDef);
+				}
 			}
 			else 
 			{
@@ -134,10 +236,22 @@ public class propertiesFile
 			}
 	}
 	
+	/**
+	 * Returns the hashCode for this propFile
+	 * 
+	 * @returns hashCode integer for propFile
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(fileExtensions, maxSubs, minSequnces, propertiesFile);
 	}
+	
+	/**
+	 *  Compares propFile objects (There shouldn't be another propFile object)
+	 *  
+	 *  
+	 *  @returns true if objects are equivalent
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -151,6 +265,11 @@ public class propertiesFile
 				&& Objects.equals(minSequnces, other.minSequnces)
 				&& Objects.equals(propertiesFile, other.propertiesFile);
 	}
+	
+	/**
+	 * Renders the propFile object as a string containing all fields
+	 * 
+	 */
 	@Override
 	public String toString() {
 		return "propertiesFile [propertiesFile=" + propertiesFile + ", fileExtensions=" + fileExtensions
