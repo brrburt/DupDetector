@@ -53,7 +53,7 @@ public class Files {
 	 * that will have all the paths to each source file. 
 	 * Empty fileExtensions list 
 	 */
-	public Files(File pFile, List<File> sFiles )
+	public Files(File pFile, List<File> sFiles)
 	{
 		propertiesFile = pFile;
 		sourceFiles= sFiles; 
