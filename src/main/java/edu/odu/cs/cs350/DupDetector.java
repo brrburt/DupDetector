@@ -12,11 +12,8 @@ public class DupDetector {
 
     public static void main(String[] args) throws Exception
     {
-        /*CountTokens t = new CountTokens();
-        t.Counting();
-        t.Display();*/
+    
 
-<<<<<<< HEAD
         /**
          * Check for errors before going further
          * 
@@ -78,11 +75,6 @@ public class DupDetector {
     	catch (NumberFormatException e) {
     		return false;
     	}
-=======
-
-        
-
->>>>>>> c6a7331 (tokenName)
     }
     
 
