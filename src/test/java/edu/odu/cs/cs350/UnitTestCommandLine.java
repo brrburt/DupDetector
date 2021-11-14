@@ -14,7 +14,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Vector;
+import java.io.PrintStream;
+import java.util.Scanner;
+
 
 
 /*
@@ -173,6 +177,68 @@ public class UnitTestCommandLine {
 		for( Files file: filesList) {
 			assertTrue(cli.getSourceFiles().contains(file));
 		}
-		
+		assertThat(cli.getSourceFiles().size(), is(6));
 	}
+	
+	@Test
+	public void testDisplay() throws IOException {
+		File expected = new File("src/test/java/edu/odu/cs/cs350/resources/expectedOutput.txt");
+		expected.createNewFile();
+		PrintStream oStream = new PrintStream(expected);
+		System.setOut(oStream);
+		String[] args = {"8", "src/test/java/edu/odu/cs/cs350/resources/unitTestCommandLine/properties.ini",
+                "src/test/java/edu/odu/cs/cs350/resources/newFakeSource.C", 
+                "src/test/java/edu/odu/cs/cs350/resources/unitTestCommandLine"}; 
+		CommandLine cli = new CommandLine();
+		cli.parseParameters(args);
+		
+		// Generate expectedOutput.txt contents
+		Vector<File> testFiles = new Vector<File>();
+		String  dir = "src/test/java/edu/odu/cs/cs350/resources/unitTestCommandLine";
+		String dir2 = dir + "/Headers";
+		String dir3 = dir + "/Other";
+		File testDir = new File(dir);
+		File testDir2 = new File(dir2);
+		File testDir3 = new File(dir3);
+		testFiles.add(new File(testDir.getAbsolutePath() + "/source1.cpp"));
+		testFiles.add(new File(testDir.getAbsolutePath() + "/source2.C"));
+		testFiles.add(new File(testDir2.getAbsolutePath() + "/header1.h"));
+		testFiles.add(new File(testDir2.getAbsolutePath() + "/header.H"));
+		testFiles.add(new File(testDir3.getAbsolutePath() + "/other.hpp"));
+		testFiles.add(new File("src/test/java/edu/odu/cs/cs350/resources/newFakeSource.C"));
+		List<String> absPaths = new ArrayList<String>();
+		for( File file: testFiles) {
+			absPaths.add(file.getAbsolutePath());
+		}
+		absPaths.sort(null);
+		System.out.println("Source Files Found:");
+		for( String str: absPaths) {
+			System.out.println(str);
+		}
+		
+		// Set up output stream to file
+		File output = new File("src/test/java/edu/odu/cs/cs350/resources/displayOutput.txt");
+		output.createNewFile();
+		PrintStream oStream2 = new PrintStream(output);
+		System.setOut(oStream2);
+		
+		cli.display();
+		
+		// Compare expectedOutput.txt and displayOutput.txt 
+		boolean filesEqual = true;
+		Scanner scannerOutput = new Scanner(output);
+		Scanner scannerExpected = new Scanner(expected);
+		while (scannerOutput.hasNext() && scannerExpected.hasNext()) {
+	        String str1 = scannerOutput.next();
+	        String str2 = scannerExpected.next();
+	        if (!str1.equals(str2))
+	            filesEqual = false;
+	    }
+		scannerOutput.close();
+		scannerExpected.close();
+		output.delete();
+		expected.delete();
+		
+		assertTrue(filesEqual);
+	} 
 }

@@ -147,11 +147,14 @@ public class CommandLine {
 		// Get nSuggestions
 		this.setNSuggestions(Integer.parseInt(args[0]));
 		
-		// Get property file
-		File pFile = new File(args[1]);
-		propertiesFile propFile = new propertiesFile(pFile);
-		this.setPropertiesFile(propFile);
-		this.getPropertiesFile().readPropertyFile();
+		if(args.length > 1) {
+			// Get property file
+			File pFile = new File(args[1]);
+			propertiesFile propFile = new propertiesFile(pFile);
+			this.setPropertiesFile(propFile);
+			this.getPropertiesFile().readPropertyFile();
+		}
+		
 		
 		// Get files/directories
 		for (int argsIndex = 2; argsIndex < args.length; argsIndex++)
@@ -224,6 +227,19 @@ public class CommandLine {
 		}
 		
 		return foundFiles;
+	}
+	
+	/**
+	 * Outputs Refactoring Suggestions to the command line interface
+	 * 
+	 * @post Sections 1 and 2 of output is displayed. 
+	 */
+	public void display() {
+		// Section 1
+		System.out.println("Source Files Found:");
+		for( Files file: this.getSourceFiles()) {
+			System.out.println(file.getPath());
+		}
 	}
 	
 	/**

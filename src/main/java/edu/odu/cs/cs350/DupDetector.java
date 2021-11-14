@@ -12,8 +12,6 @@ public class DupDetector {
 
     public static void main(String[] args) throws Exception
     {
-    
-
         /**
          * Check for errors before going further
          * 
@@ -35,6 +33,7 @@ public class DupDetector {
     	else {
     		CommandLine cli = new CommandLine();
     		cli.parseParameters(args);
+    		cli.display();
     	}
     }
  
