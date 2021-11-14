@@ -47,6 +47,11 @@ public class Token
         return text;
     }
 
+    public void setText(String theTxt)
+    {
+        this.text = theTxt;
+    }
+
     public int getLinePos()
     {
         return linePos;
