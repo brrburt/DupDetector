@@ -30,6 +30,9 @@ task reports() {
 
 task deployReports(dependsOn: 'updateGHPages' ) {
 	description 'Deploys reports to the website'
+	doLast {
+		println("Reports Deployed")
+	}
 }
 
 ////////  Website publication on GitHub pages ///////////////////
@@ -54,7 +57,7 @@ task clonePages() {
     }
 }
 
-task copyReports (/*dependsOn: ['reports', 'clonePages']*/)  { 
+task copyReports (dependsOn: ['reports', 'clonePages'])  { 
 	copy {
 	   from "$buildDir/docs"
 	   into "$buildDir/gh-pages/docs"
