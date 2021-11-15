@@ -1,5 +1,11 @@
 package edu.odu.cs.cs350;
 
+//Begin quoted code for jflex by Gerwin Klein
+//https://github.com/github/linguist/blob/master/samples/JFlex/java.jflex
+//
+
+
+
 //@SuppressWarnings("unused")
 
 import java_cup.runtime.*;
@@ -208,3 +214,4 @@ SingleCharacter = [^\r\n\'\\]
 <<EOF>>                          { return symbol(EOF); }
 
 
+// ///End quoted code
