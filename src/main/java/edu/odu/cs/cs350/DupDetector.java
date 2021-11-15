@@ -42,7 +42,7 @@ public class DupDetector {
      * Called when a help flag is given to the program; displays purpose 
      * and command line arguments
      * 
-     * @post usage information will be printed to the command line 
+     * usage information will be printed to the command line 
      */
     public static void PrintUsage() 
     {
@@ -62,8 +62,8 @@ public class DupDetector {
     /**
      * Check if a number can be converted into an integer
      * 
-     * @parameter number a string to convert into an integer
-     * @returns true if string represents an integer
+     * @param number a string to convert into an integer
+     * @return true if string represents an integer
      */
     public static boolean TryStringToInt(String number) 
     {

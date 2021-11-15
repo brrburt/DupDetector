@@ -38,7 +38,7 @@ public class Refactoring {
 	/**
 	 * Returns the hashCode for this Refactoring
 	 * 
-	 * @returns hashCode integer for Refactoring
+	 * @return hashCode integer for Refactoring
 	 */
 	@Override
 	public int hashCode() {

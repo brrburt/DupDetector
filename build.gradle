@@ -22,13 +22,9 @@ test {
     useJUnitPlatform()
 }
 
-task createJavadoc(type: Javadoc) {
-	description 'Generates Javadoc without fail on error'
-	failOnError false
-}
-
-task reports(dependsOn: createJavadoc) {
-   description 'run createJavadoc and test'
+task reports() {
+   description 'run Javadoc and test'
+   dependsOn tasks.javadoc
    dependsOn tasks.test
 }
 
@@ -43,8 +39,6 @@ task clonePages() {
         mkdir 'build/gh-pages'
         def thisRepo = rootProject.projectDir.toString()
         def pagesDir = "$buildDir/gh-pages"
-		println(thisRepo)
-		println(pagesDir)
         project.delete {
             delete pagesDir
         }
@@ -60,16 +54,14 @@ task clonePages() {
     }
 }
 
-task copyReports (type: Copy, dependsOn: ['reports', 'clonePages']) { 
-
+task copyReports (/*dependsOn: ['reports', 'clonePages']*/)  { 
 	copy {
-		from "$buildDir/docs"
-		into "$buildDir/gh-pages/docs"
+	   from "$buildDir/docs"
+	   into "$buildDir/gh-pages/docs"
 	}
-	
 	copy {
-		from "$buildDir/reports"
-		into "$buildDir/gh-pages/reports"
+	   from "$buildDir/reports"
+	   into "$buildDir/gh-pages/reports"
 	}
 }
 

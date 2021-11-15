@@ -51,7 +51,7 @@ public class CommandLine {
 	 * 
 	 * @param file source file to add to sourceFiles
 	 * 
-	 * @post new source file is added to sourceFiles
+	 * new source file is added to sourceFiles
 	 */
 	public void addSourceFile(Files file) {
 		if (!(sourceFiles.contains(file))) {
@@ -70,7 +70,7 @@ public class CommandLine {
 	/**
 	 *  set user provided properties file as pFile
 	 *  
-	 *  @post set pFile as properties file
+	 *  set pFile as properties file
 	 */
 	public void setPropertiesFile(propertiesFile propFile) {
 		pFile = propFile;
@@ -111,7 +111,7 @@ public class CommandLine {
 	 * to the command line
 	 * 
 	 * 
-	 * @post Refactoring suggestions printed to command line
+	 * Refactoring suggestions printed to command line
 	 */
 	public void printSuggestions() {
 		// Section 1 of refactoring suggestions
@@ -127,7 +127,7 @@ public class CommandLine {
 	 * Read the properties file for key-value pairs, and update 
 	 * appropriate variable values within Refactoring.
 	 * 
-	 * @post Refactoring variables updated
+	 * Refactoring variables updated
 	 */
 	public void readPropertiesFile() { 
 		
@@ -138,8 +138,8 @@ public class CommandLine {
 	 * types from arguments.
 	 * @throws IOException 
 	 *  
-	 * @parameter args command line arguments passed from main
-	 * @post File objects added to sourceFiles list and pFile set
+	 * @param args command line arguments passed from main
+	 * File objects added to sourceFiles list and pFile set
 	 *  from command line arguments
 	 */
 	public void parseParameters(String[] args) throws IOException {
@@ -167,9 +167,9 @@ public class CommandLine {
 	 * Called by parseParameters, take command line argument and searches 
 	 * for source files to add to list of source files.
 	 * 
-	 * @parameter argument file path String
+	 * @param argument file path String
 	 * 
-	 * @post recursively retrieves all source files within given directory
+	 * recursively retrieves all source files within given directory
 	 * and adds them to sourceFiles
 	 */
 	public void findSourceFiles(String argument) {
@@ -232,7 +232,7 @@ public class CommandLine {
 	/**
 	 * Outputs Refactoring Suggestions to the command line interface
 	 * 
-	 * @post Sections 1 and 2 of output is displayed. 
+	 * Sections 1 and 2 of output is displayed. 
 	 */
 	public void display() {
 		// Section 1
@@ -246,7 +246,7 @@ public class CommandLine {
 	 *  Compares command line objects (There shouldn't be another CommandLine
 	 *  object)
 	 *  
-	 *  @returns true if objects are equivalent
+	 *  @return true if objects are equivalent
 	 */
 	@Override 
 	public boolean equals(Object obj) {
@@ -271,7 +271,7 @@ public class CommandLine {
 	/**
 	 * Returns the hashCode for this CommandLine
 	 * 
-	 * @returns hashCode integer for CommandLine
+	 * @return hashCode integer for CommandLine
 	 */
 	@Override
 	public int hashCode() {

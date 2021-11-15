@@ -42,7 +42,7 @@ public class propertiesFile
      * Creates a properties file with a userDefined property file, empty fileExt list, 
      * empty minSeq string, and empty maxSub string 
      * 
-     * @param property File (this input should be accesible from CL ADT)
+     * @param pFile property File (this input should be accesible from CL ADT)
      *    
      */
 	public propertiesFile(File pFile)
@@ -101,7 +101,7 @@ public class propertiesFile
 	/**
      * Set a new propertyFile if necessary
      * 
-     * @param the path to a Property File
+     * @param path the path to a Property File
      *  
      */
 	
@@ -115,7 +115,7 @@ public class propertiesFile
 	/**
      * Set a new fileExt list if necessary
      * 
-     * @param a list of strings 
+     * @param ext a list of strings 
      *  
      */
 	
@@ -128,7 +128,7 @@ public class propertiesFile
 	/**
      * Set minSequnces 
      * 
-     * @param minSequnces String 
+     * @param min minSequnces String 
      *  
      */
 	
@@ -140,7 +140,7 @@ public class propertiesFile
 	/**
      * Set maxDubuplicats  
      * 
-     * @param maxDubuplicate string 
+     * @param max maxDubuplicate string 
      *  
      */
 	public void setmaxDubs(String max)
@@ -152,7 +152,7 @@ public class propertiesFile
 	/**
      * Adds a file extension to the list of File Extension 
      * 
-     * @param an extension expressed as a string 
+     * @param extension an extension expressed as a string 
      *  
      */
 	public void addExt (String extension)
@@ -239,7 +239,7 @@ public class propertiesFile
 	/**
 	 * Returns the hashCode for this propFile
 	 * 
-	 * @returns hashCode integer for propFile
+	 * @return hashCode integer for propFile
 	 */
 	@Override
 	public int hashCode() {
@@ -250,7 +250,7 @@ public class propertiesFile
 	 *  Compares propFile objects (There shouldn't be another propFile object)
 	 *  
 	 *  
-	 *  @returns true if objects are equivalent
+	 *  @return true if objects are equivalent
 	 */
 	@Override
 	public boolean equals(Object obj) {
