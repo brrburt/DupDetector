@@ -1,5 +1,6 @@
 plugins {
    id 'java'
+   id "org.xbib.gradle.plugin.git" version "2.0.0"
 }
 
 java {
@@ -19,4 +20,67 @@ dependencies {
 test {  
     ignoreFailures = true 
     useJUnitPlatform()
+}
+
+task createJavadoc(type: Javadoc) {
+	description 'Generates Javadoc without fail on error'
+	failOnError false
+}
+
+task reports(dependsOn: createJavadoc) {
+   description 'run createJavadoc and test'
+   dependsOn tasks.test
+}
+
+task deployReports(dependsOn: 'updateGHPages' ) {
+	description 'Deploys reports to the website'
+}
+
+////////  Website publication on GitHub pages ///////////////////
+
+task clonePages() {                                       
+    doLast {
+        mkdir 'build/gh-pages'
+        def thisRepo = rootProject.projectDir.toString()
+        def pagesDir = "$buildDir/gh-pages"
+		println(thisRepo)
+		println(pagesDir)
+        project.delete {
+            delete pagesDir
+        }
+        def grgit = git.clone {
+            dir = pagesDir
+            uri = thisRepo
+            bare = false
+			refToCheckout = 'gh-pages'
+        }
+        grgit.checkout {
+            branch = 'gh-pages'
+        }
+    }
+}
+
+task copyReports (type: Copy, dependsOn: ['reports', 'clonePages']) { 
+	from "$buildDir/docs"
+	into "$buildDir/gh-pages/docs"
+	from "$buildDir/reports"
+	into "$buildDir/gh-pages/reports"
+}
+
+task updateGHPages (dependsOn: 'copyReports') { 
+    description  'Copies reports to the gh-pages branch in preparation for a future push to GitHub'
+    doLast {
+        def pagesDir = "$buildDir/gh-pages"
+        def grgit = git.open {
+            dir = pagesDir + "/.git"
+        }
+        grgit.add (update: false, patterns: ['reports/'])
+        grgit.add (update: true, patterns: ['reports/'])
+		grgit.add (update: false, patterns: ['docs/'])
+        grgit.add (update: true, patterns: ['docs/'])
+        grgit.commit {
+            message = "Updating web pages"
+        }
+        grgit.push {}
+    }
 }
