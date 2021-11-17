@@ -1,34 +1,30 @@
 package edu.odu.cs.cs350;
 
-//Begin quoted code for jflex by Gerwin Klein
-//https://github.com/github/linguist/blob/master/samples/JFlex/java.jflex
-//
 
-
-
-//@SuppressWarnings("unused")
 
 import java_cup.runtime.*;
 %%
 
 %public
 %class GeneratedScanner
+%implements sym
 
+%unicode
 
 %line
 %column
 
-%type Token
+
 
 %{
   StringBuilder string = new StringBuilder();
   
   private Token symbol(TokenKinds type) {
-    return new Token(type, yyline+1, yycolumn+1);
+    return new JavaSymbol(type, yyline+1, yycolumn+1);
   }
 
   private Token symbol(TokenKinds type, String value) {
-    return new Token(type, yyline+1, yycolumn+1, value);
+    return new JavaSymbol(type, yyline+1, yycolumn+1, value);
   }
   ** 
    * assumes correct representation of a long value for 
@@ -91,6 +87,8 @@ Exponent = [eE] [+-]? [0-9]+
 /* string and character literals */
 StringCharacter = [^\r\n\"\\]
 SingleCharacter = [^\r\n\'\\]
+
+%state STRING, CHARLITERAL
 
 %%
 
@@ -247,7 +245,7 @@ SingleCharacter = [^\r\n\'\\]
 
 <STRING> {
   \"                             { yybegin(YYINITIAL); return symbol(STRING_LITERAL, string.toString()); }
-  
+
   {StringCharacter}+             { string.append( yytext() ); }
   
   /* escape sequences */
@@ -293,4 +291,3 @@ SingleCharacter = [^\r\n\'\\]
                                                               "\" at line "+yyline+", column "+yycolumn); }
 <<EOF>>                          { return symbol(EOF); }
 
-//ENd of quote
