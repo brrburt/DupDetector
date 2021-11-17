@@ -23,10 +23,10 @@ public class TokenStream implements Iterable<Tokens>
 
   }
 
- /* public TokenStream(final Reader input)
+  public TokenStream(final Reader input)
   {
       tokenBin = new LinkedList<Tokens>();
-      GeneratedScanner scanner = new GeneratedScanner (input);
+     /* GeneratedScanner scanner = new GeneratedScanner (input);
         try {
             Token token = scanner.yylex();
             while (token != null && token.getTokenType() != TokenName.EOF) {
@@ -35,8 +35,8 @@ public class TokenStream implements Iterable<Tokens>
             }
         } catch (IOException ex) {
             // Not necessarily a problem, depending on the input source
-        }
-  }*/
+        }*/
+  }
 
   // End quoted code
 
