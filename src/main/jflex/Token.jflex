@@ -1,32 +1,34 @@
 package edu.odu.cs.cs350;
 
+//@SuppressWArning("unused")
 
-
-import java_cup.runtime.*;
 %%
 
 %public
-%class GeneratedScanner
-%implements sym
+%class Lexer Analysis
+
 
 %unicode
-
 %line
 %column
 
+%type Tokens
 
+%cup
+%cupdebug
 
 %{
   StringBuilder string = new StringBuilder();
   
-  private Token symbol(TokenKinds type) {
-    return new JavaSymbol(type, yyline+1, yycolumn+1);
+  private Tokens symbol(TokenName tokenType) {
+    return new Tokens(type, yyline+1, yycolumn+1);
   }
 
-  private Token symbol(TokenKinds type, String value) {
-    return new JavaSymbol(type, yyline+1, yycolumn+1, value);
+  private Tokens symbol(TokenName tokenType, String value) {
+    return new Tokens(type, yyline+1, yycolumn+1, value);
   }
-  ** 
+
+  /** 
    * assumes correct representation of a long value for 
    * specified radix in scanner buffer from <code>start</code> 
    * to <code>end</code> 
@@ -95,63 +97,63 @@ SingleCharacter = [^\r\n\'\\]
 <YYINITIAL> {
 /* keywords */
 "if"                             { return symbol(TokenName.IF); }
-"break"                      { return symbol(TokenName.BREAK); }
-"case"                        { return symbol(TokenName.CASE); }
-"catch"                         { return symbol(TokenName.CATCH); }
-"char"                         { return symbol(TokenName.CHAR); }
-"class"                        { return symbol(TokenName.CLASS); }
-"const"                         { return symbol(TokenName.CONST); }
-"continue"                         { return symbol(TokenName.CONTINUE); }
+"break"                          { return symbol(TokenName.BREAK); }
+"case"                           { return symbol(TokenName.CASE); }
+"catch"                          { return symbol(TokenName.CATCH); }
+"char"                           { return symbol(TokenName.CHAR); }
+"class"                          { return symbol(TokenName.CLASS); }
+"const"                          { return symbol(TokenName.CONST); }
+"continue"                       { return symbol(TokenName.CONTINUE); }
 "default"                        { return symbol(TokenName.DEFAUlT); }
-"delete"                        { return symbol(TokenName.DELETE); }
-"do"                           { return symbol(TokenName.DO); }
+"delete"                         { return symbol(TokenName.DELETE); }
+"do"                             { return symbol(TokenName.DO); }
 "double"                         { return symbol(TokenName.DOUBLE); }
-"else"                        { return symbol(TokenName.ELSE); }
-"enum"                         { return symbol(TokenName.ENUM); }
-"explicit"                         { return symbol(TokenName.EXPLICIT); }
-"false"                        { return symbol(TokenName.FALSE); }
-"float"                        { return symbol(TokenName.FLOAT); }
-"for"                           { return symbol(TokenName.FOR); }
+"else"                           { return symbol(TokenName.ELSE); }
+"enum"                           { return symbol(TokenName.ENUM); }
+"explicit"                       { return symbol(TokenName.EXPLICIT); }
+"false"                          { return symbol(TokenName.FALSE); }
+"float"                          { return symbol(TokenName.FLOAT); }
+"for"                            { return symbol(TokenName.FOR); }
 "goto"                           { return symbol(TokenName.GOTO); }
-"inline"                        { return symbol(TokenName.INLINE); }
-"int"                        { return symbol(TokenName.INT; }
+"inline"                         { return symbol(TokenName.INLINE); }
+"int"                            { return symbol(TokenName.INT); }
 "long"                           { return symbol(TokenName.LONG); }
-"namespace"                         { return symbol(TokenName.NAMESPACE); }
-"new"                        { return symbol(TokenName.NEW); }
-"not"                         { return symbol(TokenName.NOT); }
-"nullptr"                       { return symbol(TokenName.NULLPTR); }
-"operator"                        { return symbol(TokenName.OPERATOR); }
-"or"                        { return symbol(TokenName.OR); }
-"private"                           { return symbol(TokenName.PRIVATE); }
-"protected"                           { return symbol(TokenName.PROTECTED); }
-"public"                        { return symbol(TokenName.PUBLIC); }
-"register"                        { return symbol(TokenName.REGISTER); }
-"requires"                        { return symbol(TokenName.REQUIRES); }
-"return"                        { return symbol(TokenName.RETURN); }
-"short"                         { return symbol(TokenName.SHORT); }
-"signed"                       { return symbol(TokenName.SIGNED); }
-"sizeof"                        { return symbol(TokenName.SIZEOF); }
-"static"                        { return symbol(TokenName.STATC); }
-"static_case"                           { return symbol(TokenName.STACTIC_CAST); }
-"struct"                           { return symbol(TokenName.STRUCT); }
-"switch"                        { return symbol(TokenName.SWITCH); }
-"template"                        { return symbol(TokenName.REGISTER); }
-"this"                        { return symbol(TokenName.REQUIRES); }
-"return"                        { return symbol(TokenName.RETURN); }
-"throw"                         { return symbol(TokenName.THROW); }
-"true"                       { return symbol(TokenName.TRUE); }
-"try"                        { return symbol(TokenName.TRY); }
+"namespace"                      { return symbol(TokenName.NAMESPACE); }
+"new"                            { return symbol(TokenName.NEW); }
+"not"                            { return symbol(TokenName.NOT); }
+"nullptr"                        { return symbol(TokenName.NULLPTR); }
+"operator"                       { return symbol(TokenName.OPERATOR); }
+"or"                             { return symbol(TokenName.OR); }
+"private"                        { return symbol(TokenName.PRIVATE); }
+"protected"                      { return symbol(TokenName.PROTECTED); }
+"public"                         { return symbol(TokenName.PUBLIC); }
+"register"                       { return symbol(TokenName.REGISTER); }
+"requires"                       { return symbol(TokenName.REQUIRES); }
+"return"                         { return symbol(TokenName.RETURN); }
+"short"                          { return symbol(TokenName.SHORT); }
+"signed"                         { return symbol(TokenName.SIGNED); }
+"sizeof"                         { return symbol(TokenName.SIZEOF); }
+"static"                         { return symbol(TokenName.STATC); }
+"static_case"                    { return symbol(TokenName.STACTIC_CAST); }
+"struct"                         { return symbol(TokenName.STRUCT); }
+"switch"                         { return symbol(TokenName.SWITCH); }
+"template"                       { return symbol(TokenName.REGISTER); }
+"this"                           { return symbol(TokenName.REQUIRES); }
+"return"                         { return symbol(TokenName.RETURN); }
+"throw"                          { return symbol(TokenName.THROW); }
+"true"                           { return symbol(TokenName.TRUE); }
+"try"                            { return symbol(TokenName.TRY); }
 "typedef"                        { return symbol(TokenName.TYPEDEF); }
-"typename"                        { return symbol(TokenName.TYPENAME); }
-"while"                           { return symbol(TokenName.WHILE); }
-"union"                        { return symbol(TokenName.UNION); }
-"unsigned"                        { return symbol(TokenName.UNSIGNED); }
-"using"                        { return symbol(TokenName.USING); }
+"typename"                       { return symbol(TokenName.TYPENAME); }
+"while"                          { return symbol(TokenName.WHILE); }
+"union"                          { return symbol(TokenName.UNION); }
+"unsigned"                       { return symbol(TokenName.UNSIGNED); }
+"using"                          { return symbol(TokenName.USING); }
 "virtual"                        { return symbol(TokenName.VIRTUAL); }
-"void"                         { return symbol(TokenName.VOID); }
-"iostream"                        { return symbol(TokenName.IOSTREAM); }
-"std"                         { return symbol(TokenName.STD); }
-"bool"                         { return symbol(TokenName.BOOL); }
+"void"                           { return symbol(TokenName.VOID); }
+"iostream"                       { return symbol(TokenName.IOSTREAM); }
+"std"                            { return symbol(TokenName.STD); }
+"bool"                           { return symbol(TokenName.BOOL); }
 
   /* boolean literals */
   "true"                         { return symbol(TokenName.BOOLEAN_LITERAL, true); }
@@ -216,22 +218,23 @@ SingleCharacter = [^\r\n\'\\]
     /* character literal */
   \'                             { yybegin(CHARLITERAL); }
 
+  /* numeric literals */
    /* This is matched together with the minus, because the number is too big to 
      be represented by a positive integer. */
-  "-2147483648"                  { return symbol(INTEGER_LITERAL, Integer.valueOf(Integer.MIN_VALUE)); }
+  "-2147483648"                  { return symbol(TokenName.INTEGER_LITERAL, Integer.valueOf(Integer.MIN_VALUE)); }
   
-  {DecIntegerLiteral}            { return symbol(INTEGER_LITERAL, Integer.valueOf(yytext())); }
-  {DecLongLiteral}               { return symbol(INTEGER_LITERAL, new Long(yytext().substring(0,yylength()-1))); }
+  {DecIntegerLiteral}            { return symbol(TokenName.INTEGER_LITERAL, Integer.valueOf(yytext())); }
+  {DecLongLiteral}               { return symbol(TokenName.INTEGER_LITERAL, new Long(yytext().substring(0,yylength()-1))); }
   
-  {HexIntegerLiteral}            { return symbol(INTEGER_LITERAL, Integer.valueOf((int) parseLong(2, yylength(), 16))); }
-  {HexLongLiteral}               { return symbol(INTEGER_LITERAL, new Long(parseLong(2, yylength()-1, 16))); }
+  {HexIntegerLiteral}            { return symbol(TokenName.INTEGER_LITERAL, Integer.valueOf((int) parseLong(2, yylength(), 16))); }
+  {HexLongLiteral}               { return symbol(TokenName.INTEGER_LITERAL, new Long(parseLong(2, yylength()-1, 16))); }
  
-  {OctIntegerLiteral}            { return symbol(INTEGER_LITERAL, Integer.valueOf((int) parseLong(0, yylength(), 8))); }
-  {OctLongLiteral}               { return symbol(INTEGER_LITERAL, new Long(parseLong(0, yylength()-1, 8))); }
+  {OctIntegerLiteral}            { return symbol(TokenName.INTEGER_LITERAL, Integer.valueOf((int) parseLong(0, yylength(), 8))); }
+  {OctLongLiteral}               { return symbol(TokenName.INTEGER_LITERAL, new Long(parseLong(0, yylength()-1, 8))); }
   
-  {FloatLiteral}                 { return symbol(FLOATING_POINT_LITERAL, new Float(yytext().substring(0,yylength()-1))); }
-  {DoubleLiteral}                { return symbol(FLOATING_POINT_LITERAL, new Double(yytext())); }
-  {DoubleLiteral}[dD]            { return symbol(FLOATING_POINT_LITERAL, new Double(yytext().substring(0,yylength()-1))); }
+  {FloatLiteral}                 { return symbol(TokenName.FLOATING_POINT_LITERAL, new Float(yytext().substring(0,yylength()-1))); }
+  {DoubleLiteral}                { return symbol(TokenName.FLOATING_POINT_LITERAL, new Double(yytext())); }
+  {DoubleLiteral}[dD]            { return symbol(TokenName.FLOATING_POINT_LITERAL, new Double(yytext().substring(0,yylength()-1))); }
   
   /* comments */
   {Comment}                      { /* ignore */ }
@@ -240,11 +243,11 @@ SingleCharacter = [^\r\n\'\\]
   {WhiteSpace}                   { /* ignore */ }
 
   /* identifiers */ 
-  {Identifier}                   { return symbol(IDENTIFIER, yytext()); }  
+  {Identifier}                   { return symbol(TokenName.IDENTIFIER, yytext()); }  
 }
 
 <STRING> {
-  \"                             { yybegin(YYINITIAL); return symbol(STRING_LITERAL, string.toString()); }
+  \"                             { yybegin(YYINITIAL); return symbol(TokenName.STRING_LITERAL, string.toString()); }
 
   {StringCharacter}+             { string.append( yytext() ); }
   
@@ -266,17 +269,17 @@ SingleCharacter = [^\r\n\'\\]
 }
 
 <CHARLITERAL> {
-  {SingleCharacter}\'            { yybegin(YYINITIAL); return symbol(CHARACTER_LITERAL, yytext().charAt(0)); }
+  {SingleCharacter}\'            { yybegin(YYINITIAL); return symbol(TokenName.CHARACTER_LITERAL, yytext().charAt(0)); }
   
   /* escape sequences */
-  "\\b"\'                        { yybegin(YYINITIAL); return symbol(CHARACTER_LITERAL, '\b');}
-  "\\t"\'                        { yybegin(YYINITIAL); return symbol(CHARACTER_LITERAL, '\t');}
-  "\\n"\'                        { yybegin(YYINITIAL); return symbol(CHARACTER_LITERAL, '\n');}
-  "\\f"\'                        { yybegin(YYINITIAL); return symbol(CHARACTER_LITERAL, '\f');}
-  "\\r"\'                        { yybegin(YYINITIAL); return symbol(CHARACTER_LITERAL, '\r');}
-  "\\\""\'                       { yybegin(YYINITIAL); return symbol(CHARACTER_LITERAL, '\"');}
-  "\\'"\'                        { yybegin(YYINITIAL); return symbol(CHARACTER_LITERAL, '\'');}
-  "\\\\"\'                       { yybegin(YYINITIAL); return symbol(CHARACTER_LITERAL, '\\'); }
+  "\\b"\'                        { yybegin(YYINITIAL); return symbol(TokenName.CHARACTER_LITERAL, '\b');}
+  "\\t"\'                        { yybegin(YYINITIAL); return symbol(TokenName.CHARACTER_LITERAL, '\t');}
+  "\\n"\'                        { yybegin(YYINITIAL); return symbol(TokenName.CHARACTER_LITERAL, '\n');}
+  "\\f"\'                        { yybegin(YYINITIAL); return symbol(TokenName.CHARACTER_LITERAL, '\f');}
+  "\\r"\'                        { yybegin(YYINITIAL); return symbol(TokenName.CHARACTER_LITERAL, '\r');}
+  "\\\""\'                       { yybegin(YYINITIAL); return symbol(TokenName.CHARACTER_LITERAL, '\"');}
+  "\\'"\'                        { yybegin(YYINITIAL); return symbol(TokenName.CHARACTER_LITERAL, '\'');}
+  "\\\\"\'                       { yybegin(YYINITIAL); return symbol(TokenName.CHARACTER_LITERAL, '\\'); }
   \\[0-3]?{OctDigit}?{OctDigit}\' { yybegin(YYINITIAL); 
 			                              int val = Integer.parseInt(yytext().substring(1,yylength()-1),8);
 			                            return symbol(CHARACTER_LITERAL, (char)val); }
