@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.*;
 
+
 //Begin quoted code from  S Zeil at
 //https://git.cs.odu.edu/zeil/jflexdemo/-/blob/master/src/main/java/edu/odu/cs/cs350/jflexdemo/TokenStream.java
 
@@ -23,10 +24,10 @@ public class TokenStream implements Iterable<Tokens>
 
   }
 
- /* public TokenStream(final Reader input)
+  public TokenStream(final Reader input)
   {
       tokenBin = new LinkedList<Tokens>();
-      GeneratedScanner scanner = new GeneratedScanner (input);
+     /* GeneratedScanner scanner = new GeneratedScanner (input);
         try {
             Token token = scanner.yylex();
             while (token != null && token.getTokenType() != TokenName.EOF) {
@@ -35,8 +36,8 @@ public class TokenStream implements Iterable<Tokens>
             }
         } catch (IOException ex) {
             // Not necessarily a problem, depending on the input source
-        }
-  }*/
+        }*/
+  }
 
   // End quoted code
 
