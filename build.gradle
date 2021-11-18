@@ -34,7 +34,53 @@ test {
     useJUnitPlatform()
 }
 
-task reports() {
+task copyTest (type: Copy) {        
+    from 'build/reports'
+    into "$reportsDir/"
+    dependsOn 'test'
+}
+
+task copyDocs (type: Copy) {            
+    from 'build/docs'
+    into "$docsDir/"
+    dependsOn 'javadoc'
+}
+
+task reports (dependsOn: ['test', 'javadoc', 'copyTest', 'copyDocs']) 
+{ 
+
+  
+}
+
+task deployReports (type: Copy, dependsOn: ['reports']) 
+{ 
+    doLast {
+        def thisRepo = rootProject.projectDir.toString()
+        def grgit = git.clone
+        {
+            uri = 'file:' + thisRepo
+            bare = false
+            refToCheckout = 'gh-pages'
+        }
+        grgit.checkout {
+            branch = 'gh-pages'
+        }
+        grgit.add (update: false, patterns: ['docs/'])
+        grgit.add (update: true, patterns: ['docs/'])
+        grgit.add (update: false, patterns: ['reports/'])
+        grgit.add (update: true, patterns: ['reports/'])
+        grgit.commit {
+            message = "Updating web pages"
+        }
+        grgit.push {} 
+        grgit.checkout
+        {
+            branch = 'main'
+        }
+}
+}
+
+/*task reports() {
    description 'run Javadoc and test'
    dependsOn tasks.javadoc
    dependsOn tasks.test
@@ -96,4 +142,4 @@ task updateGHPages (dependsOn: 'copyReports') {
         }
         grgit.push {}
     }
-}
+}*/
