@@ -24,18 +24,18 @@ public final void testFunction()
     String test = "456 int tokens in a file";
     TokenStream to = new TokenStream();
     Reader source = new StringReader(test);
-    //TokenStream tokenSt = new TokenStream(source);
+    TokenStream tokenSt = new TokenStream(source);
 //Begin quoted code from  S Zeil at
    /* ArrayList<Tokens> token = new ArrayList<Tokens>();
     for (Tokens toke : tokenSt)
     {
-        token.add(toke);
+        token.add(token);
     }*/
 //End quote
-    //assertEquals (6, token.size());
+  /*  assertEquals (6, token.size());
 
 
-   /* Tokens x = new Token();
+   // Tokens x = new Token();
     assertEquals(TokenName.INTEGER, x.getTokenType());
     assertEquals(1, x.getLine());
     assertEquals("456", x.getText());

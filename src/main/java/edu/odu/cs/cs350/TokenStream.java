@@ -14,50 +14,53 @@ import java.util.*;
 public class TokenStream implements Iterable<Tokens>
 {
   private List<Tokens> tokenBin;
-  private Tokens to;
+  private LexerAnalyzer scanner;
 
 
   public TokenStream()
   {
     tokenBin = new LinkedList<Tokens>();
     
-
   }
 
   public TokenStream(final Reader input)
   {
       tokenBin = new LinkedList<Tokens>();
-     /* GeneratedScanner scanner = new GeneratedScanner (input);
-        try {
-            Token token = scanner.yylex();
-            while (token != null && token.getTokenType() != TokenName.EOF) {
-                tokenBin.add(tokenBin);
-                token = scanner.yylex();
-            }
-        } catch (IOException ex) {
-            // Not necessarily a problem, depending on the input source
+      LexerAnalyzer  scanner = new LexerAnalyzer  (input);
+       /* try 
+        {
+          Tokens token = scanner.yylex();
+          while (token != null && token.getTokenType() != TokenName.EOF)
+          {
+            tokenBin.add(tokenBin);
+            token = scanner.yylex();
+          }
+        } catch (IOException ex) 
+        {
+  
         }*/
   }
-
+ 
   // End quoted code
 
 
   //return the number of tokens in files
-  /*public String toString()
+  @Override
+  public String toString()
   {
-   return tokenBin.size();
-
-  }*/
+    return "Total number of tokens found: " + Integer.toString(getTokenCount());
+  }
   /// want to read the total amount of tokens
-  /*public final int getTokenCount()
+  public final int getTokenCount()
   {
-
-  }*/
+    return tokenBin.size();
+  }
   /// iterate over the list of tokens 
   public final Iterator<Tokens> iterator() 
   {
     return tokenBin.iterator();
   }
+
 
 
 
