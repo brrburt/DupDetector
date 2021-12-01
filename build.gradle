@@ -49,6 +49,7 @@ task copyTest (type: Copy) {
     from 'build/reports'
     into "$reportsDir/"
     dependsOn 'test'
+    dependsOn 'spotbugsMain'
 }
 
 task copyDocs (type: Copy) {            
