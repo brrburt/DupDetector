@@ -2,6 +2,7 @@ plugins {
    id 'java'
    id "org.xbib.gradle.plugin.jflex" version "1.5.0"
    id "org.xbib.gradle.plugin.git" version "2.0.0"
+   id "com.github.spotbugs" version "4.7.10"
 }
 
 java {
@@ -11,6 +12,7 @@ java {
 
 repositories {
     jcenter()
+    
 }
 sourceSets {
   main {
@@ -22,8 +24,16 @@ sourceSets {
      }
   }
 }
-
-
+spotbugsMain{
+	ignoreFailures = true
+    effort = 'max'
+    reportLevel = 'medium'
+    reports {
+       xml.enabled = false
+       html.enabled = true
+    }
+}
+spotbugsTest.enabled = false
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0' 
     testImplementation 'org.hamcrest:hamcrest-library:2.2'
@@ -31,6 +41,7 @@ dependencies {
 
 test {  
     ignoreFailures = true 
+    
     useJUnitPlatform()
 }
 
@@ -46,7 +57,7 @@ task copyDocs (type: Copy) {
     dependsOn 'javadoc'
 }
 
-task reports (dependsOn: ['test', 'javadoc', 'copyTest', 'copyDocs']) 
+task reports (dependsOn: ['test', 'javadoc', 'copyTest', 'copyDocs','spotbugsMain']) 
 { 
 
   
