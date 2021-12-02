@@ -45,8 +45,14 @@ test {
     
     useJUnitPlatform()
 }
+task renameSpot (type:Copy, dependsOn:['spotbugsMain'])
+{
+	 from 'build/reports/spotbugs/main.html'
+     into 'build/reports/spotbugs'
+     rename('main.html','index.html')
+}
 
-task copyReports (dependsOn:['test','spotbugsMain','clonePages']) 
+task copyReports (dependsOn:['test','renameSpot','clonePages']) 
 {        
     doLast{
     ant.copy(todir: 'build/gh-pages/reports/')
