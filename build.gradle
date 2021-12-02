@@ -3,6 +3,7 @@ plugins {
    id "org.xbib.gradle.plugin.jflex" version "1.5.0"
    id "org.xbib.gradle.plugin.git" version "2.0.0"
    id "com.github.spotbugs" version "4.7.10"
+   id "org.ajoberstar.grgit" version "4.1.1"
 }
 
 java {
@@ -45,38 +46,82 @@ test {
     useJUnitPlatform()
 }
 
-task copyTest (type: Copy, dependsOn:['test','spotbugsMain','clonePages']) {        
-    from 'build/reports'
-    into "$reportsDir/"
+task copyReports (dependsOn:['test','spotbugsMain','clonePages']) 
+{        
+    doLast{
+    ant.copy(todir: 'build/gh-pages/reports/')
+    {
+    fileset(dir:'build/reports/')
+    }
     
+    /*from 'build/reports'
+    into "$reportsDir/"
+    */
+    }
 }
 
-task copyDocs (type: Copy, dependsOn:['javadoc','clonePages']) {            
+task copyDocs (dependsOn:['javadoc','copyReports']) {            
+    doLast{
+    ant.copy(todir: 'build/gh-pages/docs/')
+    {
+    fileset(dir: 'build/docs/')
+    }
+    
+    }
+    /*
     from 'build/docs'
     into "$docsDir/"
-  
+    */
 }
 
-task reports (dependsOn: ['test', 'javadoc', 'copyTest', 'copyDocs']) 
+task reports (dependsOn: ['copyDocs']) 
 { 
 
   
 }
 
+task updateGHPages (dependsOn: 'reports') {                     
+    group = "Reporting"
+    description  'Copies reports to the gh-pages branch in preparation for a future push to GitHub'
+    doLast {
+        def pagesDir = "$buildDir/gh-pages"
+        def grgit = git.open {
+            dir = pagesDir + "/.git"
+        }
+        grgit.add (update: false, patterns: ['reports/'])
+        grgit.add (update: true, patterns: ['reports/'])
+        grgit.add (update: false, patterns: ['docs/'])
+        grgit.add (update: true, patterns: ['docs/'])
+        grgit.commit {
+            message = "Updating web pages"
+        }
+        grgit.push {}
+        grgit.close()
+    }
+
+}
 task clonePages 
 { 
     doLast {
+        mkdir 'build/gh-pages'
         def thisRepo = rootProject.projectDir.toString()
         println('Comment'+thisRepo)
+        def pagesDir = "$buildDir/gh-pages"
+        project.delete {
+            delete pagesDir
+        }
         def grgit = git.clone
         {
-            uri = 'file:' + thisRepo
+            dir = pagesDir
+            uri = /*'file:' +*/ thisRepo
             bare = false
             refToCheckout = 'gh-pages'
         }
         grgit.checkout {
             branch = 'gh-pages'
         }
+         grgit.close()
+        /*
         grgit.add (update: false, patterns: ['docs/'])
         grgit.add (update: true, patterns: ['docs/'])
         grgit.add (update: false, patterns: ['reports/'])
@@ -89,6 +134,7 @@ task clonePages
         {
             branch = 'main'
         }
+        */
 }
 }
 
