@@ -1,0 +1,1211 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta charset="UTF-8"/>
+      <title>SpotBugs Report</title>
+      <style type="text/css">
+		.tablerow0 {
+			background: #EEEEEE;
+		}
+
+		.tablerow1 {
+			background: white;
+		}
+
+		.detailrow0 {
+			background: #EEEEEE;
+		}
+
+		.detailrow1 {
+			background: white;
+		}
+
+		.tableheader {
+			background: #b9b9fe;
+			font-size: larger;
+		}
+
+		.tablerow0:hover, .tablerow1:hover {
+			background: #aaffaa;
+		}
+
+		.priority-1 {
+				color: red;
+				font-weight: bold;
+		}
+		.priority-2 {
+				color: orange;
+				font-weight: bold;
+		}
+		.priority-3 {
+				color: green;
+				font-weight: bold;
+		}
+		.priority-4 {
+				color: blue;
+				font-weight: bold;
+		}
+		</style>
+      <script type="text/javascript">
+			function toggleRow(elid) {
+				if (document.getElementById) {
+					element = document.getElementById(elid);
+					if (element) {
+						if (element.style.display == 'none') {
+							element.style.display = 'block';
+							//window.status = 'Toggle on!';
+						} else {
+							element.style.display = 'none';
+							//window.status = 'Toggle off!';
+						}
+					}
+				}
+			}
+		</script>
+   </head>
+   <body>
+      <h1>
+         <a href="https://spotbugs.github.io/">SpotBugs</a> Report</h1>
+      <h2>Project Information</h2>
+      <p>Project: 
+		DupDetector (spotbugsMain)</p>
+      <p>SpotBugs version: 4.5.0</p>
+      <p>Code analyzed:</p>
+      <ul>
+         <li>C:\Users\Larry\Documents\Fall2021\CS 350\DupDetector\build\classes\java\main\edu\odu\cs\cs350\CommandLine.class</li>
+         <li>C:\Users\Larry\Documents\Fall2021\CS 350\DupDetector\build\classes\java\main\edu\odu\cs\cs350\CountTokens.class</li>
+         <li>C:\Users\Larry\Documents\Fall2021\CS 350\DupDetector\build\classes\java\main\edu\odu\cs\cs350\DupDetector.class</li>
+         <li>C:\Users\Larry\Documents\Fall2021\CS 350\DupDetector\build\classes\java\main\edu\odu\cs\cs350\Files.class</li>
+         <li>C:\Users\Larry\Documents\Fall2021\CS 350\DupDetector\build\classes\java\main\edu\odu\cs\cs350\LexerAnalyzer.class</li>
+         <li>C:\Users\Larry\Documents\Fall2021\CS 350\DupDetector\build\classes\java\main\edu\odu\cs\cs350\propertiesFile.class</li>
+         <li>C:\Users\Larry\Documents\Fall2021\CS 350\DupDetector\build\classes\java\main\edu\odu\cs\cs350\Refactoring.class</li>
+         <li>C:\Users\Larry\Documents\Fall2021\CS 350\DupDetector\build\classes\java\main\edu\odu\cs\cs350\Token.class</li>
+         <li>C:\Users\Larry\Documents\Fall2021\CS 350\DupDetector\build\classes\java\main\edu\odu\cs\cs350\TokenName.class</li>
+         <li>C:\Users\Larry\Documents\Fall2021\CS 350\DupDetector\build\classes\java\main\edu\odu\cs\cs350\Tokens.class</li>
+         <li>C:\Users\Larry\Documents\Fall2021\CS 350\DupDetector\build\classes\java\main\edu\odu\cs\cs350\TokenStream.class</li>
+      </ul>
+      <p>
+         <br/>
+         <br/>
+      </p>
+      <h2>Metrics</h2>
+      <p>1339 lines of code analyzed,
+	in 11 classes, 
+	in 1 packages.</p>
+      <table width="500" cellpadding="5" cellspacing="2">
+         <tr class="tableheader">
+            <th align="left">Metric</th>
+            <th align="right">Total</th>
+            <th align="right">Density*</th>
+         </tr>
+         <tr class="tablerow0">
+            <td>High Priority Warnings</td>
+            <td align="right">3</td>
+            <td align="right">2.24</td>
+         </tr>
+         <tr class="tablerow1">
+            <td>Medium Priority Warnings</td>
+            <td align="right">48</td>
+            <td align="right">35.85</td>
+         </tr>
+         <tr class="$totalClass">
+            <td>
+               <b>Total Warnings</b>
+            </td>
+            <td align="right">
+               <b>51</b>
+            </td>
+            <td align="right">
+               <b>38.09</b>
+            </td>
+         </tr>
+      </table>
+      <p>
+         <i>(* Defects per Thousand lines of non-commenting source statements)</i>
+      </p>
+      <p>
+         <br/>
+         <br/>
+      </p>
+      <h2>Contents</h2>
+      <ul>
+         <li>
+            <a href="#Warnings_BAD_PRACTICE">Bad practice Warnings</a>
+         </li>
+         <li>
+            <a href="#Warnings_EXPERIMENTAL">Experimental Warnings</a>
+         </li>
+         <li>
+            <a href="#Warnings_I18N">Internationalization Warnings</a>
+         </li>
+         <li>
+            <a href="#Warnings_MALICIOUS_CODE">Malicious code vulnerability Warnings</a>
+         </li>
+         <li>
+            <a href="#Warnings_PERFORMANCE">Performance Warnings</a>
+         </li>
+         <li>
+            <a href="#Warnings_STYLE">Dodgy code Warnings</a>
+         </li>
+         <li>
+            <a href="#Details">Details</a>
+         </li>
+      </ul>
+      <h1>Summary</h1>
+      <table width="500" cellpadding="5" cellspacing="2">
+         <tr class="tableheader">
+            <th align="left">Warning Type</th>
+            <th align="right">Number</th>
+         </tr>
+         <tr class="tablerow0">
+            <td>
+               <a href="#Warnings_BAD_PRACTICE">Bad practice Warnings</a>
+            </td>
+            <td align="right">14</td>
+         </tr>
+         <tr class="tablerow1">
+            <td>
+               <a href="#Warnings_EXPERIMENTAL">Experimental Warnings</a>
+            </td>
+            <td align="right">1</td>
+         </tr>
+         <tr class="tablerow0">
+            <td>
+               <a href="#Warnings_I18N">Internationalization Warnings</a>
+            </td>
+            <td align="right">2</td>
+         </tr>
+         <tr class="tablerow1">
+            <td>
+               <a href="#Warnings_MALICIOUS_CODE">Malicious code vulnerability Warnings</a>
+            </td>
+            <td align="right">11</td>
+         </tr>
+         <tr class="tablerow0">
+            <td>
+               <a href="#Warnings_PERFORMANCE">Performance Warnings</a>
+            </td>
+            <td align="right">6</td>
+         </tr>
+         <tr class="tablerow1">
+            <td>
+               <a href="#Warnings_STYLE">Dodgy code Warnings</a>
+            </td>
+            <td align="right">17</td>
+         </tr>
+         <tr class="tablerow0">
+            <td>
+               <b>Total</b>
+            </td>
+            <td align="right">
+               <b>51</b>
+            </td>
+         </tr>
+      </table>
+      <h1>Warnings</h1>
+      <p>Click on a warning row to see full context information.</p>
+      <h2>
+         <a name="Warnings_BAD_PRACTICE">Bad practice Warnings</a>
+      </h2>
+      <table class="warningtable" width="100%" cellspacing="0">
+         <tr class="tableheader">
+            <th align="left">Code</th>
+            <th align="left">Warning</th>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e197');">
+            <td>
+               <span class="priority-2">CN</span>
+            </td>
+            <td>edu.odu.cs.cs350.CountTokens defines clone() but doesn't implement Cloneable</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e197" style="display: none;">
+                  <a href="#CN_IMPLEMENTS_CLONE_BUT_NOT_CLONEABLE">Bug type CN_IMPLEMENTS_CLONE_BUT_NOT_CLONEABLE (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.CountTokens<br/>In method edu.odu.cs.cs350.CountTokens.clone()<br/>At CountTokens.java:[line 83]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e257');">
+            <td>
+               <span class="priority-2">CN</span>
+            </td>
+            <td>edu.odu.cs.cs350.Files defines clone() but doesn't implement Cloneable</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e257" style="display: none;">
+                  <a href="#CN_IMPLEMENTS_CLONE_BUT_NOT_CLONEABLE">Bug type CN_IMPLEMENTS_CLONE_BUT_NOT_CLONEABLE (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.Files<br/>In method edu.odu.cs.cs350.Files.clone()<br/>At Files.java:[line 173]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e616');">
+            <td>
+               <span class="priority-2">Dm</span>
+            </td>
+            <td>edu.odu.cs.cs350.Token.error(int, int, String) invokes System.exit(...), which shuts down the entire virtual machine</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e616" style="display: none;">
+                  <a href="#DM_EXIT">Bug type DM_EXIT (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.Token<br/>In method edu.odu.cs.cs350.Token.error(int, int, String)<br/>At Token.java:[line 110]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e641');">
+            <td>
+               <span class="priority-2">FS</span>
+            </td>
+            <td>Format string should use %n rather than \n in edu.odu.cs.cs350.Token.error(int, int, String)</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e641" style="display: none;">
+                  <a href="#VA_FORMAT_STRING_USES_NEWLINE">Bug type VA_FORMAT_STRING_USES_NEWLINE (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.Token<br/>In method edu.odu.cs.cs350.Token.error(int, int, String)<br/>Called method java.io.PrintStream.printf(String, Object[])<br/>Format string "%s in line %d, pos %d\n"<br/>At Token.java:[line 104]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e150');">
+            <td>
+               <span class="priority-2">NP</span>
+            </td>
+            <td>edu.odu.cs.cs350.CommandLine.equals(Object) does not check for null argument</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e150" style="display: none;">
+                  <a href="#NP_EQUALS_SHOULD_HANDLE_NULL_ARGUMENT">Bug type NP_EQUALS_SHOULD_HANDLE_NULL_ARGUMENT (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.CommandLine<br/>In method edu.odu.cs.cs350.CommandLine.equals(Object)<br/>Parameter obj<br/>At CommandLine.java:[lines 253-258]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e404');">
+            <td>
+               <span class="priority-2">NP</span>
+            </td>
+            <td>edu.odu.cs.cs350.Files.equals(Object) does not check for null argument</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e404" style="display: none;">
+                  <a href="#NP_EQUALS_SHOULD_HANDLE_NULL_ARGUMENT">Bug type NP_EQUALS_SHOULD_HANDLE_NULL_ARGUMENT (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.Files<br/>In method edu.odu.cs.cs350.Files.equals(Object)<br/>Parameter obj<br/>At Files.java:[lines 158-163]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e602');">
+            <td>
+               <span class="priority-2">NP</span>
+            </td>
+            <td>edu.odu.cs.cs350.Refactoring.equals(Object) does not check for null argument</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e602" style="display: none;">
+                  <a href="#NP_EQUALS_SHOULD_HANDLE_NULL_ARGUMENT">Bug type NP_EQUALS_SHOULD_HANDLE_NULL_ARGUMENT (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.Refactoring<br/>In method edu.odu.cs.cs350.Refactoring.equals(Object)<br/>Parameter obj<br/>At Refactoring.java:[lines 19-24]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e209');">
+            <td>
+               <span class="priority-2">Nm</span>
+            </td>
+            <td>The method name edu.odu.cs.cs350.CountTokens.Counting() doesn't start with a lower case letter</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e209" style="display: none;">
+                  <a href="#NM_METHOD_NAMING_CONVENTION">Bug type NM_METHOD_NAMING_CONVENTION (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.CountTokens<br/>In method edu.odu.cs.cs350.CountTokens.Counting()<br/>At CountTokens.java:[lines 93-95]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e221');">
+            <td>
+               <span class="priority-2">Nm</span>
+            </td>
+            <td>The method name edu.odu.cs.cs350.CountTokens.Display() doesn't start with a lower case letter</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e221" style="display: none;">
+                  <a href="#NM_METHOD_NAMING_CONVENTION">Bug type NM_METHOD_NAMING_CONVENTION (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.CountTokens<br/>In method edu.odu.cs.cs350.CountTokens.Display()<br/>At CountTokens.java:[lines 99-100]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e233');">
+            <td>
+               <span class="priority-2">Nm</span>
+            </td>
+            <td>The method name edu.odu.cs.cs350.DupDetector.PrintUsage() doesn't start with a lower case letter</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e233" style="display: none;">
+                  <a href="#NM_METHOD_NAMING_CONVENTION">Bug type NM_METHOD_NAMING_CONVENTION (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.DupDetector<br/>In method edu.odu.cs.cs350.DupDetector.PrintUsage()<br/>At DupDetector.java:[lines 49-59]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e245');">
+            <td>
+               <span class="priority-2">Nm</span>
+            </td>
+            <td>The method name edu.odu.cs.cs350.DupDetector.TryStringToInt(String) doesn't start with a lower case letter</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e245" style="display: none;">
+                  <a href="#NM_METHOD_NAMING_CONVENTION">Bug type NM_METHOD_NAMING_CONVENTION (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.DupDetector<br/>In method edu.odu.cs.cs350.DupDetector.TryStringToInt(String)<br/>At DupDetector.java:[lines 71-75]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e392');">
+            <td>
+               <span class="priority-2">Nm</span>
+            </td>
+            <td>The method name edu.odu.cs.cs350.Files.ReadPropertiesFile() doesn't start with a lower case letter</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e392" style="display: none;">
+                  <a href="#NM_METHOD_NAMING_CONVENTION">Bug type NM_METHOD_NAMING_CONVENTION (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.Files<br/>In method edu.odu.cs.cs350.Files.ReadPropertiesFile()<br/>At Files.java:[lines 106-126]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e728');">
+            <td>
+               <span class="priority-2">Nm</span>
+            </td>
+            <td>The class name edu.odu.cs.cs350.propertiesFile doesn't start with an upper case letter</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e728" style="display: none;">
+                  <a href="#NM_CLASS_NAMING_CONVENTION">Bug type NM_CLASS_NAMING_CONVENTION (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.propertiesFile<br/>At propertiesFile.java:[lines 34-275]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e774');">
+            <td>
+               <span class="priority-2">OS</span>
+            </td>
+            <td>edu.odu.cs.cs350.propertiesFile.readPropertyFile() may fail to close stream</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e774" style="display: none;">
+                  <a href="#OS_OPEN_STREAM">Bug type OS_OPEN_STREAM (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.propertiesFile<br/>In method edu.odu.cs.cs350.propertiesFile.readPropertyFile()<br/>Need to close java.io.InputStream <br/>At propertiesFile.java:[line 186]</p>
+            </td>
+         </tr>
+      </table>
+      <h2>
+         <a name="Warnings_EXPERIMENTAL">Experimental Warnings</a>
+      </h2>
+      <table class="warningtable" width="100%" cellspacing="0">
+         <tr class="tableheader">
+            <th align="left">Code</th>
+            <th align="left">Warning</th>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e737');">
+            <td>
+               <span class="priority-2">OBL</span>
+            </td>
+            <td>edu.odu.cs.cs350.propertiesFile.readPropertyFile() may fail to clean up java.io.InputStream</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e737" style="display: none;">
+                  <a href="#OBL_UNSATISFIED_OBLIGATION">Bug type OBL_UNSATISFIED_OBLIGATION (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.propertiesFile<br/>In method edu.odu.cs.cs350.propertiesFile.readPropertyFile()<br/>Reference type java.io.InputStream<br/>1 instances of obligation remaining<br/>Obligation to clean up resource created at propertiesFile.java:[line 186] is not discharged<br/>Path continues at propertiesFile.java:[line 187]<br/>Path continues at propertiesFile.java:[line 202]<br/>Path continues at propertiesFile.java:[line 203]<br/>Path continues at propertiesFile.java:[line 205]<br/>Path continues at propertiesFile.java:[line 219]<br/>Path continues at propertiesFile.java:[line 221]<br/>Path continues at propertiesFile.java:[line 235]<br/>Path continues at propertiesFile.java:[line 237]<br/>Remaining obligations: {InputStream x 1}</p>
+            </td>
+         </tr>
+      </table>
+      <h2>
+         <a name="Warnings_I18N">Internationalization Warnings</a>
+      </h2>
+      <table class="warningtable" width="100%" cellspacing="0">
+         <tr class="tableheader">
+            <th align="left">Code</th>
+            <th align="left">Warning</th>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e269');">
+            <td>
+               <span class="priority-1">Dm</span>
+            </td>
+            <td>Found reliance on default encoding in edu.odu.cs.cs350.Files.ReadPropertiesFile(): new java.util.Scanner(File)</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e269" style="display: none;">
+                  <a href="#DM_DEFAULT_ENCODING">Bug type DM_DEFAULT_ENCODING (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.Files<br/>In method edu.odu.cs.cs350.Files.ReadPropertiesFile()<br/>Called method new java.util.Scanner(File)<br/>At Files.java:[line 106]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e284');">
+            <td>
+               <span class="priority-1">Dm</span>
+            </td>
+            <td>Found reliance on default encoding in edu.odu.cs.cs350.Files.contentToString(String): new java.io.FileReader(String)</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e284" style="display: none;">
+                  <a href="#DM_DEFAULT_ENCODING">Bug type DM_DEFAULT_ENCODING (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.Files<br/>In method edu.odu.cs.cs350.Files.contentToString(String)<br/>Called method new java.io.FileReader(String)<br/>At Files.java:[line 140]</p>
+            </td>
+         </tr>
+      </table>
+      <h2>
+         <a name="Warnings_MALICIOUS_CODE">Malicious code vulnerability Warnings</a>
+      </h2>
+      <table class="warningtable" width="100%" cellspacing="0">
+         <tr class="tableheader">
+            <th align="left">Code</th>
+            <th align="left">Warning</th>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e54');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>edu.odu.cs.cs350.CommandLine.getPropertiesFile() may expose internal representation by returning CommandLine.pFile</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e54" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.CommandLine<br/>In method edu.odu.cs.cs350.CommandLine.getPropertiesFile()<br/>Field edu.odu.cs.cs350.CommandLine.pFile<br/>At CommandLine.java:[line 67]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e70');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>edu.odu.cs.cs350.CommandLine.getSourceFiles() may expose internal representation by returning CommandLine.sourceFiles</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e70" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.CommandLine<br/>In method edu.odu.cs.cs350.CommandLine.getSourceFiles()<br/>Field edu.odu.cs.cs350.CommandLine.sourceFiles<br/>At CommandLine.java:[line 46]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e86');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>edu.odu.cs.cs350.CommandLine.getTokenizer() may expose internal representation by returning CommandLine.tokenizer</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e86" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.CommandLine<br/>In method edu.odu.cs.cs350.CommandLine.getTokenizer()<br/>Field edu.odu.cs.cs350.CommandLine.tokenizer<br/>At CommandLine.java:[line 104]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e311');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>edu.odu.cs.cs350.Files.getFileExtensions() may expose internal representation by returning Files.fileExtensions</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e311" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.Files<br/>In method edu.odu.cs.cs350.Files.getFileExtensions()<br/>Field edu.odu.cs.cs350.Files.fileExtensions<br/>At Files.java:[line 84]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e328');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>edu.odu.cs.cs350.Files.getsourceFiles() may expose internal representation by returning Files.sourceFiles</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e328" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.Files<br/>In method edu.odu.cs.cs350.Files.getsourceFiles()<br/>Field edu.odu.cs.cs350.Files.sourceFiles<br/>At Files.java:[line 89]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e694');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>edu.odu.cs.cs350.propertiesFile.getFileExtensions() may expose internal representation by returning propertiesFile.fileExtensions</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e694" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.propertiesFile<br/>In method edu.odu.cs.cs350.propertiesFile.getFileExtensions()<br/>Field edu.odu.cs.cs350.propertiesFile.fileExtensions<br/>At propertiesFile.java:[line 75]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e102');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>edu.odu.cs.cs350.CommandLine.setPropertiesFile(propertiesFile) may expose internal representation by storing an externally mutable object into CommandLine.pFile</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e102" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.CommandLine<br/>In method edu.odu.cs.cs350.CommandLine.setPropertiesFile(propertiesFile)<br/>Field edu.odu.cs.cs350.CommandLine.pFile<br/>Local variable named propFile<br/>At CommandLine.java:[line 76]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e120');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>edu.odu.cs.cs350.CommandLine.setTokenizer(CountTokens) may expose internal representation by storing an externally mutable object into CommandLine.tokenizer</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e120" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.CommandLine<br/>In method edu.odu.cs.cs350.CommandLine.setTokenizer(CountTokens)<br/>Field edu.odu.cs.cs350.CommandLine.tokenizer<br/>Local variable named tokens<br/>At CommandLine.java:[line 100]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e344');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new edu.odu.cs.cs350.Files(File, List) may expose internal representation by storing an externally mutable object into Files.sourceFiles</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e344" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.Files<br/>In method new edu.odu.cs.cs350.Files(File, List)<br/>Field edu.odu.cs.cs350.Files.sourceFiles<br/>Local variable named sFiles<br/>At Files.java:[line 60]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e362');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>edu.odu.cs.cs350.Files.setfileExtensions(ArrayList) may expose internal representation by storing an externally mutable object into Files.fileExtensions</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e362" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.Files<br/>In method edu.odu.cs.cs350.Files.setfileExtensions(ArrayList)<br/>Field edu.odu.cs.cs350.Files.fileExtensions<br/>Local variable named ext<br/>At Files.java:[line 71]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e710');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>edu.odu.cs.cs350.propertiesFile.setfileExtensions(List) may expose internal representation by storing an externally mutable object into propertiesFile.fileExtensions</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e710" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.propertiesFile<br/>In method edu.odu.cs.cs350.propertiesFile.setfileExtensions(List)<br/>Field edu.odu.cs.cs350.propertiesFile.fileExtensions<br/>Local variable named ext<br/>At propertiesFile.java:[line 125]</p>
+            </td>
+         </tr>
+      </table>
+      <h2>
+         <a name="Warnings_PERFORMANCE">Performance Warnings</a>
+      </h2>
+      <table class="warningtable" width="100%" cellspacing="0">
+         <tr class="tableheader">
+            <th align="left">Code</th>
+            <th align="left">Warning</th>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e299');">
+            <td>
+               <span class="priority-2">Dm</span>
+            </td>
+            <td>new edu.odu.cs.cs350.Files() invokes inefficient new String() constructor</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e299" style="display: none;">
+                  <a href="#DM_STRING_VOID_CTOR">Bug type DM_STRING_VOID_CTOR (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.Files<br/>In method new edu.odu.cs.cs350.Files()<br/>At Files.java:[line 40]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e578');">
+            <td>
+               <span class="priority-2">Dm</span>
+            </td>
+            <td>new edu.odu.cs.cs350.Refactoring() invokes inefficient new String() constructor</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e578" style="display: none;">
+                  <a href="#DM_STRING_VOID_CTOR">Bug type DM_STRING_VOID_CTOR (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.Refactoring<br/>In method new edu.odu.cs.cs350.Refactoring()<br/>At Refactoring.java:[line 14]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e539');">
+            <td>
+               <span class="priority-2">UrF</span>
+            </td>
+            <td>Unread field: edu.odu.cs.cs350.LexerAnalyzer.yychar</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e539" style="display: none;">
+                  <a href="#URF_UNREAD_FIELD">Bug type URF_UNREAD_FIELD (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.LexerAnalyzer<br/>Field edu.odu.cs.cs350.LexerAnalyzer.yychar<br/>At LexerAnalyzer.java:[line 1012]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e552');">
+            <td>
+               <span class="priority-2">UrF</span>
+            </td>
+            <td>Unread field: edu.odu.cs.cs350.LexerAnalyzer.zzAtBOL</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e552" style="display: none;">
+                  <a href="#URF_UNREAD_FIELD">Bug type URF_UNREAD_FIELD (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.LexerAnalyzer<br/>Field edu.odu.cs.cs350.LexerAnalyzer.zzAtBOL<br/>At LexerAnalyzer.java:[line 859]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e565');">
+            <td>
+               <span class="priority-2">UrF</span>
+            </td>
+            <td>Unread field: edu.odu.cs.cs350.LexerAnalyzer.zzEOFDone</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e565" style="display: none;">
+                  <a href="#URF_UNREAD_FIELD">Bug type URF_UNREAD_FIELD (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.LexerAnalyzer<br/>Field edu.odu.cs.cs350.LexerAnalyzer.zzEOFDone<br/>At LexerAnalyzer.java:[line 991]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e681');">
+            <td>
+               <span class="priority-2">UuF</span>
+            </td>
+            <td>Unused field: edu.odu.cs.cs350.TokenStream.scanner</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e681" style="display: none;">
+                  <a href="#UUF_UNUSED_FIELD">Bug type UUF_UNUSED_FIELD (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.TokenStream<br/>Field edu.odu.cs.cs350.TokenStream.scanner<br/>In TokenStream.java</p>
+            </td>
+         </tr>
+      </table>
+      <h2>
+         <a name="Warnings_STYLE">Dodgy code Warnings</a>
+      </h2>
+      <table class="warningtable" width="100%" cellspacing="0">
+         <tr class="tableheader">
+            <th align="left">Code</th>
+            <th align="left">Warning</th>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e18');">
+            <td>
+               <span class="priority-2">DLS</span>
+            </td>
+            <td>Dead store to extensions in edu.odu.cs.cs350.CommandLine.findSourceFiles(String)</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e18" style="display: none;">
+                  <a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.CommandLine<br/>In method edu.odu.cs.cs350.CommandLine.findSourceFiles(String)<br/>Local variable named extensions<br/>At CommandLine.java:[line 181]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e36');">
+            <td>
+               <span class="priority-2">DLS</span>
+            </td>
+            <td>Dead store to tempFiles in edu.odu.cs.cs350.CommandLine.searchDirectories(File)</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e36" style="display: none;">
+                  <a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.CommandLine<br/>In method edu.odu.cs.cs350.CommandLine.searchDirectories(File)<br/>Local variable named tempFiles<br/>At CommandLine.java:[line 205]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e430');">
+            <td>
+               <span class="priority-2">DLS</span>
+            </td>
+            <td>Dead store to offset in edu.odu.cs.cs350.LexerAnalyzer.zzUnpackAction()</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e430" style="display: none;">
+                  <a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.LexerAnalyzer<br/>In method edu.odu.cs.cs350.LexerAnalyzer.zzUnpackAction()<br/>Local variable named offset<br/>At LexerAnalyzer.java:[line 369]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e448');">
+            <td>
+               <span class="priority-2">DLS</span>
+            </td>
+            <td>Dead store to offset in edu.odu.cs.cs350.LexerAnalyzer.zzUnpackAttribute()</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e448" style="display: none;">
+                  <a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.LexerAnalyzer<br/>In method edu.odu.cs.cs350.LexerAnalyzer.zzUnpackAttribute()<br/>Local variable named offset<br/>At LexerAnalyzer.java:[line 791]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e466');">
+            <td>
+               <span class="priority-2">DLS</span>
+            </td>
+            <td>Dead store to offset in edu.odu.cs.cs350.LexerAnalyzer.zzUnpackRowMap()</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e466" style="display: none;">
+                  <a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.LexerAnalyzer<br/>In method edu.odu.cs.cs350.LexerAnalyzer.zzUnpackRowMap()<br/>Local variable named offset<br/>At LexerAnalyzer.java:[line 437]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e484');">
+            <td>
+               <span class="priority-2">DLS</span>
+            </td>
+            <td>Dead store to offset in edu.odu.cs.cs350.LexerAnalyzer.zzUnpackTrans()</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e484" style="display: none;">
+                  <a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.LexerAnalyzer<br/>In method edu.odu.cs.cs350.LexerAnalyzer.zzUnpackTrans()<br/>Local variable named offset<br/>At LexerAnalyzer.java:[line 740]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e503');">
+            <td>
+               <span class="priority-2">DLS</span>
+            </td>
+            <td>Dead store to offset in edu.odu.cs.cs350.LexerAnalyzer.zzUnpackcmap_blocks()</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e503" style="display: none;">
+                  <a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.LexerAnalyzer<br/>In method edu.odu.cs.cs350.LexerAnalyzer.zzUnpackcmap_blocks()<br/>Local variable named offset<br/>At LexerAnalyzer.java:[line 322]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e521');">
+            <td>
+               <span class="priority-2">DLS</span>
+            </td>
+            <td>Dead store to offset in edu.odu.cs.cs350.LexerAnalyzer.zzUnpackcmap_top()</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e521" style="display: none;">
+                  <a href="#DLS_DEAD_LOCAL_STORE">Bug type DLS_DEAD_LOCAL_STORE (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.LexerAnalyzer<br/>In method edu.odu.cs.cs350.LexerAnalyzer.zzUnpackcmap_top()<br/>Local variable named offset<br/>At LexerAnalyzer.java:[line 67]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e659');">
+            <td>
+               <span class="priority-1">DLS</span>
+            </td>
+            <td>Dead store to scanner rather than field with same name in new edu.odu.cs.cs350.TokenStream(Reader)</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e659" style="display: none;">
+                  <a href="#DLS_DEAD_LOCAL_STORE_SHADOWS_FIELD">Bug type DLS_DEAD_LOCAL_STORE_SHADOWS_FIELD (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.TokenStream<br/>In method new edu.odu.cs.cs350.TokenStream(Reader)<br/>Local variable named scanner<br/>Did you mean to refer to the field edu.odu.cs.cs350.TokenStream.scanner?<br/>At TokenStream.java:[line 29]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e138');">
+            <td>
+               <span class="priority-2">Eq</span>
+            </td>
+            <td>edu.odu.cs.cs350.CommandLine.equals(Object) is unusual</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e138" style="display: none;">
+                  <a href="#EQ_UNUSUAL">Bug type EQ_UNUSUAL (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.CommandLine<br/>In method edu.odu.cs.cs350.CommandLine.equals(Object)<br/>At CommandLine.java:[lines 253-258]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e380');">
+            <td>
+               <span class="priority-2">Eq</span>
+            </td>
+            <td>edu.odu.cs.cs350.Files.equals(Object) is unusual</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e380" style="display: none;">
+                  <a href="#EQ_UNUSUAL">Bug type EQ_UNUSUAL (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.Files<br/>In method edu.odu.cs.cs350.Files.equals(Object)<br/>At Files.java:[lines 158-163]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e590');">
+            <td>
+               <span class="priority-2">Eq</span>
+            </td>
+            <td>edu.odu.cs.cs350.Refactoring.equals(Object) is unusual</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e590" style="display: none;">
+                  <a href="#EQ_UNUSUAL">Bug type EQ_UNUSUAL (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.Refactoring<br/>In method edu.odu.cs.cs350.Refactoring.equals(Object)<br/>At Refactoring.java:[lines 19-24]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e164');">
+            <td>
+               <span class="priority-2">NP</span>
+            </td>
+            <td>Possible null pointer dereference in edu.odu.cs.cs350.CommandLine.searchDirectories(File) due to return value of called method</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e164" style="display: none;">
+                  <a href="#NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE">Bug type NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.CommandLine<br/>In method edu.odu.cs.cs350.CommandLine.searchDirectories(File)<br/>Value loaded from ?<br/>Dereferenced at CommandLine.java:[line 220]<br/>Known null at CommandLine.java:[line 220]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e181');">
+            <td>
+               <span class="priority-2">NP</span>
+            </td>
+            <td>Possible null pointer dereference in edu.odu.cs.cs350.CommandLine.searchDirectories(File) due to return value of called method</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e181" style="display: none;">
+                  <a href="#NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE">Bug type NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.CommandLine<br/>In method edu.odu.cs.cs350.CommandLine.searchDirectories(File)<br/>Value loaded from foundDir<br/>Dereferenced at CommandLine.java:[line 210]<br/>Known null at CommandLine.java:[line 209]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e418');">
+            <td>
+               <span class="priority-2">UCF</span>
+            </td>
+            <td>Useless control flow in edu.odu.cs.cs350.Files.ReadPropertiesFile()</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e418" style="display: none;">
+                  <a href="#UCF_USELESS_CONTROL_FLOW">Bug type UCF_USELESS_CONTROL_FLOW (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.Files<br/>In method edu.odu.cs.cs350.Files.ReadPropertiesFile()<br/>At Files.java:[line 110]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e790');">
+            <td>
+               <span class="priority-2">UCF</span>
+            </td>
+            <td>Useless control flow in edu.odu.cs.cs350.propertiesFile.readPropertyFile()</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e790" style="display: none;">
+                  <a href="#UCF_USELESS_CONTROL_FLOW">Bug type UCF_USELESS_CONTROL_FLOW (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.propertiesFile<br/>In method edu.odu.cs.cs350.propertiesFile.readPropertyFile()<br/>At propertiesFile.java:[line 190]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e628');">
+            <td>
+               <span class="priority-2">UrF</span>
+            </td>
+            <td>Unread public/protected field: edu.odu.cs.cs350.Token.value</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e628" style="display: none;">
+                  <a href="#URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD">Bug type URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD (click for details)</a>
+                  <br/>In class edu.odu.cs.cs350.Token<br/>Field edu.odu.cs.cs350.Token.value<br/>At Token.java:[line 33]</p>
+            </td>
+         </tr>
+      </table>
+      <h1>
+         <a name="Details">Details</a>
+      </h1>
+      <h2>
+         <a name="CN_IMPLEMENTS_CLONE_BUT_NOT_CLONEABLE">CN_IMPLEMENTS_CLONE_BUT_NOT_CLONEABLE: Class defines clone() but doesn't implement Cloneable</a>
+      </h2>
+
+<p> This class defines a clone() method but the class doesn't implement Cloneable.
+There are some situations in which this is OK (e.g., you want to control how subclasses
+can clone themselves), but just make sure that this is what you intended.
+</p>
+
+    <h2>
+         <a name="DLS_DEAD_LOCAL_STORE">DLS_DEAD_LOCAL_STORE: Dead store to local variable</a>
+      </h2>
+
+<p>
+This instruction assigns a value to a local variable,
+but the value is not read or used in any subsequent instruction.
+Often, this indicates an error, because the value computed is never
+used.
+</p>
+<p>
+Note that Sun's javac compiler often generates dead stores for
+final local variables.  Because SpotBugs is a bytecode-based tool,
+there is no easy way to eliminate these false positives.
+</p>
+
+    <h2>
+         <a name="DLS_DEAD_LOCAL_STORE_SHADOWS_FIELD">DLS_DEAD_LOCAL_STORE_SHADOWS_FIELD: Dead store to local variable that shadows field</a>
+      </h2>
+
+<p>
+This instruction assigns a value to a local variable,
+but the value is not read or used in any subsequent instruction.
+Often, this indicates an error, because the value computed is never
+used. There is a field with the same name as the local variable. Did you
+mean to assign to that variable instead?
+</p>
+
+    <h2>
+         <a name="DM_EXIT">DM_EXIT: Method invokes System.exit(...)</a>
+      </h2>
+
+  <p> Invoking System.exit shuts down the entire Java virtual machine. This
+   should only been done when it is appropriate. Such calls make it
+   hard or impossible for your code to be invoked by other code.
+   Consider throwing a RuntimeException instead.</p>
+
+    <h2>
+         <a name="DM_STRING_VOID_CTOR">DM_STRING_VOID_CTOR: Method invokes inefficient new String() constructor</a>
+      </h2>
+
+  <p> Creating a new <code>java.lang.String</code> object using the
+  no-argument constructor wastes memory because the object so created will
+  be functionally indistinguishable from the empty string constant
+  <code>""</code>.&nbsp; Java guarantees that identical string constants
+  will be represented by the same <code>String</code> object.&nbsp; Therefore,
+  you should just use the empty string constant directly.</p>
+
+    <h2>
+         <a name="DM_DEFAULT_ENCODING">DM_DEFAULT_ENCODING: Reliance on default encoding</a>
+      </h2>
+
+<p> Found a call to a method which will perform a byte to String (or String to byte) conversion, and will assume that the default platform encoding is suitable. This will cause the application behaviour to vary between platforms. Use an alternative API and specify a charset name or Charset object explicitly.  </p>
+
+      <h2>
+         <a name="EI_EXPOSE_REP">EI_EXPOSE_REP: May expose internal representation by returning reference to mutable object</a>
+      </h2>
+
+  <p> Returning a reference to a mutable object value stored in one of the object's fields
+  exposes the internal representation of the object.&nbsp;
+   If instances
+   are accessed by untrusted code, and unchecked changes to
+   the mutable object would compromise security or other
+   important properties, you will need to do something different.
+  Returning a new copy of the object is better approach in many situations.</p>
+
+    <h2>
+         <a name="EI_EXPOSE_REP2">EI_EXPOSE_REP2: May expose internal representation by incorporating reference to mutable object</a>
+      </h2>
+
+  <p> This code stores a reference to an externally mutable object into the
+  internal representation of the object.&nbsp;
+   If instances
+   are accessed by untrusted code, and unchecked changes to
+   the mutable object would compromise security or other
+   important properties, you will need to do something different.
+  Storing a copy of the object is better approach in many situations.</p>
+
+    <h2>
+         <a name="EQ_UNUSUAL">EQ_UNUSUAL: Unusual equals method</a>
+      </h2>
+
+  <p> This class doesn't do any of the patterns we recognize for checking that the type of the argument
+is compatible with the type of the <code>this</code> object. There might not be anything wrong with
+this code, but it is worth reviewing.
+</p>
+
+    <h2>
+         <a name="VA_FORMAT_STRING_USES_NEWLINE">VA_FORMAT_STRING_USES_NEWLINE: Format string should use %n rather than \n</a>
+      </h2>
+
+<p>
+This format string includes a newline character (\n). In format strings, it is generally
+ preferable to use %n, which will produce the platform-specific line separator.
+</p>
+
+     <h2>
+         <a name="NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE">NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE: Possible null pointer dereference due to return value of called method</a>
+      </h2>
+      
+<p> The return value from a method is dereferenced without a null check,
+and the return value of that method is one that should generally be checked
+for null.  This may lead to a <code>NullPointerException</code> when the code is executed.
+</p>
+      
+   <h2>
+         <a name="NP_EQUALS_SHOULD_HANDLE_NULL_ARGUMENT">NP_EQUALS_SHOULD_HANDLE_NULL_ARGUMENT: equals() method does not check for null argument</a>
+      </h2>
+      
+      <p>
+      This implementation of equals(Object) violates the contract defined
+      by java.lang.Object.equals() because it does not check for null
+      being passed as the argument.  All equals() methods should return
+      false if passed a null value.
+      </p>
+      
+   <h2>
+         <a name="NM_CLASS_NAMING_CONVENTION">NM_CLASS_NAMING_CONVENTION: Class names should start with an upper case letter</a>
+      </h2>
+
+  <p> Class names should be nouns, in mixed case with the first letter of each internal word capitalized. Try to keep your class names simple and descriptive. Use whole words-avoid acronyms and abbreviations (unless the abbreviation is much more widely used than the long form, such as URL or HTML).
+</p>
+
+    <h2>
+         <a name="NM_METHOD_NAMING_CONVENTION">NM_METHOD_NAMING_CONVENTION: Method names should start with a lower case letter</a>
+      </h2>
+
+  <p>
+Methods should be verbs, in mixed case with the first letter lowercase, with the first letter of each internal word capitalized.
+</p>
+
+    <h2>
+         <a name="OBL_UNSATISFIED_OBLIGATION">OBL_UNSATISFIED_OBLIGATION: Method may fail to clean up stream or resource</a>
+      </h2>
+          
+          <p>
+          This method may fail to clean up (close, dispose of) a stream,
+          database object, or other
+          resource requiring an explicit cleanup operation.
+          </p>
+
+          <p>
+          In general, if a method opens a stream or other resource,
+          the method should use a try/finally block to ensure that
+          the stream or resource is cleaned up before the method
+          returns.
+          </p>
+
+          <p>
+          This bug pattern is essentially the same as the
+          OS_OPEN_STREAM and ODR_OPEN_DATABASE_RESOURCE
+          bug patterns, but is based on a different
+          (and hopefully better) static analysis technique.
+          We are interested is getting feedback about the
+          usefulness of this bug pattern.
+          For sending feedback, check:
+          </p>
+          <ul>
+            <li><a href="https://github.com/spotbugs/spotbugs/blob/master/CONTRIBUTING.md">contributing guideline</a></li>
+            <li><a href="https://github.com/spotbugs/discuss/issues?q=">malinglist</a></li>
+          </ul>
+
+          <p>
+          In particular,
+          the false-positive suppression heuristics for this
+          bug pattern have not been extensively tuned, so
+          reports about false positives are helpful to us.
+          </p>
+
+          <p>
+          See Weimer and Necula, <i>Finding and Preventing Run-Time Error Handling Mistakes</i>, for
+          a description of the analysis technique.
+          </p>
+          
+      <h2>
+         <a name="OS_OPEN_STREAM">OS_OPEN_STREAM: Method may fail to close stream</a>
+      </h2>
+
+<p> The method creates an IO stream object, does not assign it to any
+fields, pass it to other methods that might close it,
+or return it, and does not appear to close
+the stream on all paths out of the method.&nbsp; This may result in
+a file descriptor leak.&nbsp; It is generally a good
+idea to use a <code>finally</code> block to ensure that streams are
+closed.</p>
+
+    <h2>
+         <a name="UCF_USELESS_CONTROL_FLOW">UCF_USELESS_CONTROL_FLOW: Useless control flow</a>
+      </h2>
+
+<p> This method contains a useless control flow statement, where
+control flow continues onto the same place regardless of whether or not
+the branch is taken. For example,
+this is caused by having an empty statement
+block for an <code>if</code> statement:</p>
+<pre><code>if (argv.length == 0) {
+    // TODO: handle this case
+}
+</code></pre>
+
+    <h2>
+         <a name="URF_UNREAD_FIELD">URF_UNREAD_FIELD: Unread field</a>
+      </h2>
+
+  <p> This field is never read.&nbsp; Consider removing it from the class.</p>
+
+    <h2>
+         <a name="URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD">URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD: Unread public/protected field</a>
+      </h2>
+
+  <p> This field is never read.&nbsp;
+The field is public or protected, so perhaps
+    it is intended to be used with classes not seen as part of the analysis. If not,
+consider removing it from the class.</p>
+
+    <h2>
+         <a name="UUF_UNUSED_FIELD">UUF_UNUSED_FIELD: Unused field</a>
+      </h2>
+
+  <p> This field is never used.&nbsp; Consider removing it from the class.</p>
+
+    </body>
+</html>
