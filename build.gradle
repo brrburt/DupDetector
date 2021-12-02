@@ -45,17 +45,16 @@ test {
     useJUnitPlatform()
 }
 
-task copyTest (type: Copy) {        
+task copyTest (type: Copy, dependsOn:['test','spotbugsMain','clonePages']) {        
     from 'build/reports'
     into "$reportsDir/"
-    dependsOn 'test'
-    dependsOn 'spotbugsMain'
+    
 }
 
-task copyDocs (type: Copy) {            
+task copyDocs (type: Copy, dependsOn:['javadoc','clonePages']) {            
     from 'build/docs'
     into "$docsDir/"
-    dependsOn 'javadoc'
+  
 }
 
 task reports (dependsOn: ['test', 'javadoc', 'copyTest', 'copyDocs']) 
@@ -64,10 +63,11 @@ task reports (dependsOn: ['test', 'javadoc', 'copyTest', 'copyDocs'])
   
 }
 
-task deployReports (type: Copy, dependsOn: ['reports']) 
+task clonePages 
 { 
     doLast {
         def thisRepo = rootProject.projectDir.toString()
+        println('Comment'+thisRepo)
         def grgit = git.clone
         {
             uri = 'file:' + thisRepo
