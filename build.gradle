@@ -54,9 +54,6 @@ task copyReports (dependsOn:['test','spotbugsMain','clonePages'])
     fileset(dir:'build/reports/')
     }
     
-    /*from 'build/reports'
-    into "$reportsDir/"
-    */
     }
 }
 
@@ -68,10 +65,6 @@ task copyDocs (dependsOn:['javadoc','copyReports']) {
     }
     
     }
-    /*
-    from 'build/docs'
-    into "$docsDir/"
-    */
 }
 
 task reports (dependsOn: ['copyDocs']) 
@@ -100,7 +93,7 @@ task updateGHPages (dependsOn: 'reports') {
     }
 
 }
-task clonePages 
+task clonePages()
 { 
     doLast {
         mkdir 'build/gh-pages'
@@ -121,83 +114,5 @@ task clonePages
             branch = 'gh-pages'
         }
          grgit.close()
-        /*
-        grgit.add (update: false, patterns: ['docs/'])
-        grgit.add (update: true, patterns: ['docs/'])
-        grgit.add (update: false, patterns: ['reports/'])
-        grgit.add (update: true, patterns: ['reports/'])
-        grgit.commit {
-            message = "Updating web pages"
-        }
-        grgit.push {} 
-        grgit.checkout
-        {
-            branch = 'main'
-        }
-        */
 }
 }
-
-/*task reports() {
-   description 'run Javadoc and test'
-   dependsOn tasks.javadoc
-   dependsOn tasks.test
-}
-
-task deployReports(dependsOn: 'updateGHPages' ) {
-	description 'Deploys reports to the website'
-	doLast {
-		println("Reports Deployed")
-	}
-}
-
-////////  Website publication on GitHub pages ///////////////////
-
-task clonePages() {                                       
-    doLast {
-        mkdir 'build/gh-pages'
-        def thisRepo = rootProject.projectDir.toString()
-        def pagesDir = "$buildDir/gh-pages"
-        project.delete {
-            delete pagesDir
-        }
-        def grgit = git.clone {
-            dir = pagesDir
-            uri = thisRepo
-            bare = false
-			refToCheckout = 'gh-pages'
-        }
-        grgit.checkout {
-            branch = 'gh-pages'
-        }
-    }
-}
-
-task copyReports (dependsOn: ['reports', 'clonePages'])  { 
-	copy {
-	   from "$buildDir/docs"
-	   into "$buildDir/gh-pages/docs"
-	}
-	copy {
-	   from "$buildDir/reports"
-	   into "$buildDir/gh-pages/reports"
-	}
-}
-
-task updateGHPages (dependsOn: 'copyReports') { 
-    description  'Copies reports to the gh-pages branch in preparation for a future push to GitHub'
-    doLast {
-        def pagesDir = "$buildDir/gh-pages"
-        def grgit = git.open {
-            dir = pagesDir + "/.git"
-        }
-        grgit.add (update: false, patterns: ['reports/'])
-        grgit.add (update: true, patterns: ['reports/'])
-		grgit.add (update: false, patterns: ['docs/'])
-        grgit.add (update: true, patterns: ['docs/'])
-        grgit.commit {
-            message = "Updating web pages"
-        }
-        grgit.push {}
-    }
-}*/
