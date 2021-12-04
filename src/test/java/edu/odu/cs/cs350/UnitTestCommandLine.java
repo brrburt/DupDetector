@@ -50,12 +50,12 @@ public class UnitTestCommandLine {
 		Vector<File> fakeFiles = new Vector<File>();
 		Vector<Files> filesList = new Vector<Files>();
 		
-		File pFile = new File("src/test/java/edu/odu/cs/cs350/resources/unitTestCommandLine/properties.ini");
+		File pFile = new File("src/test/resources/unitTestCommandLine/properties.ini");
 		propertiesFile propFile = new propertiesFile(pFile);
 		propFile.readPropertyFile();
 		
 		// Create test directories and files lists
-		String  dir = "src/test/java/edu/odu/cs/cs350/resources/unitTestCommandLine";
+		String  dir = "src/test/resources/unitTestCommandLine";
 		String dir2 = dir + "/Headers";
 		String dir3 = dir + "/Other";
 		File testDir = new File(dir);
@@ -141,13 +141,13 @@ public class UnitTestCommandLine {
 	
 	@Test 
 	public void testParseParameters() throws IOException {
-		String[] args = {"8", "src/test/java/edu/odu/cs/cs350/resources/unitTestCommandLine/properties.ini",
-		                 "src/test/java/edu/odu/cs/cs350/resources/newFakeSource.C", 
-		                 "src/test/java/edu/odu/cs/cs350/resources/unitTestCommandLine"};
-		File pFile = new File("src/test/java/edu/odu/cs/cs350/resources/unitTestCommandLine/properties.ini");
+		String[] args = {"8", "src/test/resources/unitTestCommandLine/properties.ini",
+		                 "src/test/resources/newFakeSource.C", 
+		                 "src/test/resources/unitTestCommandLine"};
+		File pFile = new File("src/test/resources/unitTestCommandLine/properties.ini");
 		propertiesFile propFile = new propertiesFile(pFile);
 		propFile.readPropertyFile();
-		String  dir = "src/test/java/edu/odu/cs/cs350/resources/unitTestCommandLine";
+		String  dir = "src/test/resources/unitTestCommandLine";
 		String dir2 = dir + "/Headers";
 		String dir3 = dir + "/Other";
 		File testDir = new File(dir);
@@ -182,19 +182,19 @@ public class UnitTestCommandLine {
 	
 	@Test
 	public void testDisplay() throws IOException {
-		File expected = new File("src/test/java/edu/odu/cs/cs350/resources/expectedOutput.txt");
+		File expected = new File("src/test/resources/expectedOutput.txt");
 		expected.createNewFile();
 		PrintStream oStream = new PrintStream(expected);
 		System.setOut(oStream);
-		String[] args = {"8", "src/test/java/edu/odu/cs/cs350/resources/unitTestCommandLine/properties.ini",
-                "src/test/java/edu/odu/cs/cs350/resources/newFakeSource.C", 
-                "src/test/java/edu/odu/cs/cs350/resources/unitTestCommandLine"}; 
+		String[] args = {"8", "src/test/resources/unitTestCommandLine/properties.ini",
+                "src/test/resources/newFakeSource.C", 
+                "src/test/resources/unitTestCommandLine"}; 
 		CommandLine cli = new CommandLine();
 		cli.parseParameters(args);
 		
 		// Generate expectedOutput.txt contents
 		Vector<File> testFiles = new Vector<File>();
-		String  dir = "src/test/java/edu/odu/cs/cs350/resources/unitTestCommandLine";
+		String  dir = "src/test/resources/unitTestCommandLine";
 		String dir2 = dir + "/Headers";
 		String dir3 = dir + "/Other";
 		File testDir = new File(dir);
@@ -205,7 +205,7 @@ public class UnitTestCommandLine {
 		testFiles.add(new File(testDir2.getAbsolutePath() + "/header1.h"));
 		testFiles.add(new File(testDir2.getAbsolutePath() + "/header.H"));
 		testFiles.add(new File(testDir3.getAbsolutePath() + "/other.hpp"));
-		testFiles.add(new File("src/test/java/edu/odu/cs/cs350/resources/newFakeSource.C"));
+		testFiles.add(new File("src/test/resources/newFakeSource.C"));
 		List<String> absPaths = new ArrayList<String>();
 		for( File file: testFiles) {
 			absPaths.add(file.getAbsolutePath());
@@ -217,7 +217,7 @@ public class UnitTestCommandLine {
 		}
 		
 		// Set up output stream to file
-		File output = new File("src/test/java/edu/odu/cs/cs350/resources/displayOutput.txt");
+		File output = new File("src/test/resources/displayOutput.txt");
 		output.createNewFile();
 		PrintStream oStream2 = new PrintStream(output);
 		System.setOut(oStream2);
