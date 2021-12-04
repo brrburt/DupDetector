@@ -20,6 +20,7 @@ jobs:
       run: ./gradlew build
     - name: Make Sure gh-pages is available 
       working-directory: .
-      run:  git checkout -b gh-pages origin/gh-pages git checkout main
+      run: git checkout -b gh-pages origin/gh-pages 
+      run: git checkout main
     - name: updateGHPages task
       run: ./gradlew updateGHPages
