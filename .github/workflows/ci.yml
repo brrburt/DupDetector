@@ -20,7 +20,6 @@ jobs:
       run: ./gradlew build
     - name: Set up Local gh-pages branch 
       run: |
-      	git checkout -b gh-pages origin/gh-pages
-      	git checkout main
+      	echo "This Step is Running." 
     - name: updateGHPages task
       run: ./gradlew updateGHPages
