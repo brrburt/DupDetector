@@ -18,5 +18,10 @@ jobs:
       uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
     - name: Build with Gradle
       run: ./gradlew build
-    - name: updateGHPages task
+    - name: Set up local gh-pages branch 
+      working-directory: .
+      run: |
+         git checkout -b gh-pages origin/gh-pages  # make sure that gh-pages branch is available
+         git checkout main # but then go back to main
+- name: updateGHPages task
       run: ./gradlew updateGHPages
