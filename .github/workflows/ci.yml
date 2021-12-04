@@ -19,8 +19,8 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - name: Make Sure gh-pages is available 
-      run: git checkout -b gh-pages origin/gh-pages 
-    - name: Go back to main branch 
-      run: git checkout main
+      working-directory: .
+      run:  |
+      git checkout -b gh-pages origin/gh-pages 
     - name: updateGHPages task
       run: ./gradlew updateGHPages
