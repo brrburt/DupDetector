@@ -20,8 +20,5 @@ jobs:
       uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
     - name: Build with Gradle
       run: ./gradlew build
-    - name: Make Sure gh-pages is available 
-      working-directory: .
-      run: echo "Comment" 
     - name: updateGHPages task
       run: ./gradlew updateGHPages
