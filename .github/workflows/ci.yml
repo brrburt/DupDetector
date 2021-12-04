@@ -19,7 +19,6 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - name: Set up local gh-pages branch 
-      working-directory: .
       run: |
          git checkout -b gh-pages origin/gh-pages  # make sure that gh-pages branch is available
          git checkout main # but then go back to main
