@@ -135,6 +135,8 @@ StringCharacter = [^\r\n\"\\]
 
  /* operators */
   "="                            { return symbol(TokenName.EQ); }
+  "@"                            { return symbol(TokenName.OP_AT); }
+  "#"                            { return symbol(TokenName.POUND); }
   ">"                            { return symbol(TokenName.GT); }
   "<"                            { return symbol(TokenName.LT); }
   "!"                            { return symbol(TokenName.NOT); }

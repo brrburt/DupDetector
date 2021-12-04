@@ -3,25 +3,24 @@ package edu.odu.cs.cs350;
 public class Tokens 
 {
     private TokenName tokenType;
-    private String text;
+    private String location;
     private int line;
     private int column;
 
     public Tokens(TokenName token, int lineNum, int columnNum)
     {
         this.tokenType = token;
-        this.text = "";
+        this.location = "";
         this.line = lineNum;
         this.column = columnNum; 
     }
 
-    public Tokens(TokenName token, int lineNum, int columnNum, String theText)
+    public Tokens(TokenName token, int lineNum, int columnNum, String position)
     {
         this.tokenType = token;
-        this.text = "";
+        this.location = position;
         this.line = lineNum;
         this.column = columnNum; 
-        this.text = theText;
     }
     
     public TokenName getTokenType()
@@ -29,11 +28,15 @@ public class Tokens
         return this.tokenType;
     }
 
-    public String getText()
+    public String getLocation()
     {
-        return this.text;
+        return this.location;
     }
 
+    public void setLine(int lineNum)
+    {
+        this.line = lineNum;
+    }
     public String getLine()
     {
         return Integer.toString((this.line));
@@ -46,8 +49,9 @@ public class Tokens
 
     public String toString()
     {
-        if (getText().length() > 0) {
-            return getLine() + " : " + getColumn() + " : " + getTokenType() + " : " + getText();
+        if (getLocation().length() > 0) 
+        {
+            return getLine() + " : " + getColumn() + " : " + getTokenType() + " : " + getLocation();
         } else {
             return getLine() + " : " + getColumn() + " : " + getTokenType().toString();
         }
@@ -55,7 +59,7 @@ public class Tokens
 
     public int hashCode()
     {
-        return text.hashCode();
+        return location.hashCode();
     }
 
     public boolean equals(Object rhs)
@@ -63,7 +67,7 @@ public class Tokens
         if (!(rhs instanceof Tokens)) {
             return false;
         }
-        return (this.text).equals(((Tokens) rhs).text);
+        return (this.location).equals(((Tokens) rhs).location);
     }
     
     

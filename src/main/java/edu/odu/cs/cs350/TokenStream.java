@@ -5,7 +5,7 @@ import java.io.Reader;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.*;
+import java.util.Scanner;
 
 
 //Begin quoted code from  S Zeil at
@@ -15,30 +15,42 @@ public class TokenStream implements Iterable<Tokens>
 {
   private List<Tokens> tokenBin;
   private LexerAnalyzer scanner;
+ 
 
 
   public TokenStream()
   {
     tokenBin = new LinkedList<Tokens>();
+    scanner = new LexerAnalyzer(null);
+  
     
   }
 
   public TokenStream(final Reader input)
   {
-      tokenBin = new LinkedList<Tokens>();
-      LexerAnalyzer  scanner = new LexerAnalyzer  (input);
-       /* try 
+    tokenBin = new LinkedList<Tokens>();
+    scanner = new LexerAnalyzer(input);
+  
+    
+  }
+
+  public void readCode()
+  {
+     // tokenBin = new LinkedList<Tokens>();
+     // scanner = new LexerAnalyzer  (input);
+        try 
         {
           Tokens token = scanner.yylex();
           while (token != null && token.getTokenType() != TokenName.EOF)
           {
-            tokenBin.add(tokenBin);
+            tokenBin.add(token);
             token = scanner.yylex();
           }
-        } catch (IOException ex) 
+        } 
+        catch (IOException ex)
         {
-  
-        }*/
+          System.out.println(ex);
+        }
   }
  
   // End quoted code
@@ -60,6 +72,7 @@ public class TokenStream implements Iterable<Tokens>
   {
     return tokenBin.iterator();
   }
+  
 
 
 
