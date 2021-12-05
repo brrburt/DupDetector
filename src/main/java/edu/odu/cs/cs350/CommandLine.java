@@ -250,7 +250,10 @@ public class CommandLine {
 			if(r.getValidSuggestion() && refactorCount < this.getNSuggestions()) {
 				refactorCount++;
 				System.out.println("Opportunity " + r.getImprovement() +
-						", " + r.getRefactorTokens() + "tokens");
+						", " + r.getRefactorTokens() + " tokens");
+				System.out.println(r.getSourceFile().getAbsolutePath() + ":" 
+						 + r.getRefactorRow() + ":" 
+						 + r.getRefactorColumn());
 			}
 		}
 	}

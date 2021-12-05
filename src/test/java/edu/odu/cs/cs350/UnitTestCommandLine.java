@@ -244,7 +244,10 @@ public class UnitTestCommandLine {
 		System.out.println();
 		for( RefactoringStub rs: rStubs) {
 			System.out.println("Opportunity " + rs.getImprovement() +
-					", " + rs.getRefactorTokens() + "tokens");
+					", " + rs.getRefactorTokens() + " tokens");
+			System.out.println(rs.getSourceFile().getAbsolutePath() + ":" 
+					 + rs.getRefactorRow() + ":" 
+					 + rs.getRefactorColumn());
 		}
 		
 		// Set up output stream to file
