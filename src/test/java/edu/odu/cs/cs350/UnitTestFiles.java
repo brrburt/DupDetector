@@ -58,10 +58,10 @@ public class UnitTestFiles
 		String path = pFile.getAbsolutePath();
 		List <File>sourceFiles = new ArrayList<File>();
 		//assertTrue (pFile.exists());
-		Files p = new Files(pFile,sourceFiles); 
+		//Files p = new Files(pFile,sourceFiles); 
 		//assertTrue(p.getpropertiesFile().canRead());
 		//assertTrue(p.getpropertiesFile().equals(pFile));
-		p.ReadPropertiesFile();   /*issue here */
+		//p.ReadPropertiesFile();   /*issue here */
 	}
 
 	

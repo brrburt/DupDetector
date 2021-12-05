@@ -51,12 +51,12 @@ public class UnitTestFileTokens {
 		
 		cli.findSourceFiles(dir);
 		
-		for(Files file: cli.getSourceFiles()) {
-			assertTrue(files.contains(file.getPath()));
+		for(File file: cli.getSourceFiles()) {
+			assertTrue(files.contains(file));
 		}
 		
 		// Test for absolute path
-		for(Files file: cli.getSourceFiles()) {
+		for(File file: cli.getSourceFiles()) {
 			assertTrue(file.getPath().startsWith(":\\", 1) || file.getPath().startsWith("/"));
 		}
 		
