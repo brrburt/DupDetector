@@ -208,6 +208,7 @@ public class UnitTestCommandLine {
 		rStubs.add(rStub6);
 		for( RefactoringStub rs: rStubs) {
 			rs.setTokenCount(0);
+			rs.setValidSuggestion();
 		}
 		cli.addRefactoring(rStub);
 		cli.addRefactoring(rStub2);
@@ -240,13 +241,17 @@ public class UnitTestCommandLine {
 			System.out.println("\t" + rs.getSourceFile().getAbsolutePath()
 								+ ", " + rs.getTokenCount());
 		}
+		System.out.println();
+		for( RefactoringStub rs: rStubs) {
+			System.out.println("Opportunity " + rs.getImprovement() +
+					", " + rs.getRefactorTokens() + "tokens");
+		}
 		
 		// Set up output stream to file
 		File output = new File("src/test/resources/displayOutput.txt");
 		output.createNewFile();
 		PrintStream oStream2 = new PrintStream(output);
 		System.setOut(oStream2);
-		cli.getRefactoring().add(rStub);
 		cli.display();
 		
 		// Compare expectedOutput.txt and displayOutput.txt 
@@ -268,4 +273,10 @@ public class UnitTestCommandLine {
 		
 		assertTrue(filesEqual);
 	} 
+	
+	@Test
+	public void testDisplay2() {
+		boolean pass = true;
+		assertTrue(pass);
+	}
 }

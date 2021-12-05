@@ -244,6 +244,15 @@ public class CommandLine {
 			System.out.println("\t" + r.getSourceFile().getAbsolutePath() +
 								   ", " + r.getTokenCount());
 		}
+		System.out.println();
+		int refactorCount = 0;
+		for( Refactoring r: this.getRefactoring()) {
+			if(r.getValidSuggestion() && refactorCount < this.getNSuggestions()) {
+				refactorCount++;
+				System.out.println("Opportunity " + r.getImprovement() +
+						", " + r.getRefactorTokens() + "tokens");
+			}
+		}
 	}
 	
 	/**

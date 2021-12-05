@@ -42,6 +42,9 @@ public class DupDetector {
     		for( Refactoring r: refactors) {
     			cli.addRefactoring(r);
     		}
+    		for( Refactoring r: cli.getRefactoring()) {
+    			r.setValidSuggestion();
+    		}
     		/* ********* END OF REPLACEMENT ******** */
     		cli.display();
     	}

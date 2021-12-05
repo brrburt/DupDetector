@@ -8,8 +8,10 @@ public class Refactoring {
 	private int improvement;
 	private TokenStream tokens;
 	private int tokenCount;
+	private int refactorTokens;
 	private int refactorRow;
 	private int refactorColumn;
+	private boolean validSuggestion;
 	private String fileName; 
 	
 	Refactoring() {
@@ -18,6 +20,7 @@ public class Refactoring {
 		refactorColumn = 0;
 		tokenCount = 0;
 		fileName = new String();
+		validSuggestion = false;
 	}
 	
 	Refactoring(File file) {
@@ -26,6 +29,7 @@ public class Refactoring {
 		refactorColumn = 0;
 		fileName = new String();
 		sourceFile = file;
+		validSuggestion = false;
 	}
 	
 	/** 
@@ -92,6 +96,51 @@ public class Refactoring {
 	 */
 	public void setTokens(TokenStream t) {
 		tokens = t;
+	}
+	
+	/**
+	 * 
+	 * @return int number of tokens in the refactoring Suggestion
+	 */
+	public int getRefactorTokens() {
+		return refactorTokens;
+	}
+	
+	/**
+	 * 
+	 * Sets the number of tokens for the refactoring suggestion
+	 */
+	public void setRefactorTokens(int rt) {
+		refactorTokens = rt;
+	}
+	
+	
+	/**
+	 * 
+	 * @return int Opportunity for improvement
+	 */
+	public int getImprovement() {
+		return improvement;
+	}
+	
+	/**
+	 * 
+	 * sets the value for opportunity for improvement
+	 */
+	public void setImprovement(int value) {
+		improvement = value;
+	}
+	
+	/**
+	 * 
+	 * Set this Refactor as a valid refactor suggestion
+	 */
+	public void setValidSuggestion() {
+		validSuggestion = true;
+	}
+	
+	public boolean getValidSuggestion() {
+		return validSuggestion;
 	}
 	
 	@Override 
