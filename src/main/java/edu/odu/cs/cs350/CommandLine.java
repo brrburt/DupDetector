@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class CommandLine {
 	
-	private List<Files> sourceFiles;
+	private List<File> sourceFiles;
 	private propertiesFile pFile;
 	private Refactoring refactor;
 	private CountTokens tokenizer;
@@ -29,7 +29,7 @@ public class CommandLine {
 	 * properties file, or Refactoring object
 	 */
 	CommandLine() {
-		sourceFiles = new ArrayList<Files>();
+		sourceFiles = new ArrayList<File>();
 		pFile = new propertiesFile();
 		refactor = new Refactoring();
 		tokenizer = new CountTokens();
@@ -42,7 +42,7 @@ public class CommandLine {
 	 * returns a list of source files
 	 * @return sourceFiles list of sourceFiles
 	 */
-	public List<Files> getSourceFiles() {
+	public List<File> getSourceFiles() {
 		return sourceFiles;
 	}
 	
@@ -53,7 +53,7 @@ public class CommandLine {
 	 * 
 	 * new source file is added to sourceFiles
 	 */
-	public void addSourceFile(Files file) {
+	public void addSourceFile(File file) {
 		if (!(sourceFiles.contains(file))) {
 			sourceFiles.add(file);
 		}
@@ -116,8 +116,8 @@ public class CommandLine {
 	public void printSuggestions() {
 		// Section 1 of refactoring suggestions
 		System.out.println("Files scanned:");
-		for(Files file: this.getSourceFiles()) {
-			tokenizer.setText(file.contentToString(file.getPath()));
+		for(File file: this.getSourceFiles()) {
+			tokenizer.setText(file.getAbsolutePath());
 			tokenizer.Counting();
 			System.out.println("    " + file.getPath() + ", " + tokenizer.getNumOfTokens());	
 		}
@@ -174,6 +174,7 @@ public class CommandLine {
 	 */
 	public void findSourceFiles(String argument) {
 		File sourceDir = new File(argument);
+		sourceDir = sourceDir.getAbsoluteFile();
 		// Create collection of all files found
 		Vector<File> allFiles = this.searchDirectories(sourceDir);
 		
@@ -185,8 +186,7 @@ public class CommandLine {
 		for( File file: allFiles) {
 			for( String ext: extensions) {
 				if( file.getName().endsWith(ext)) {
-					Files source = new Files(file.getAbsolutePath());
-					addSourceFile(source);
+					addSourceFile(file);
 				}
 			}
 		}
@@ -237,7 +237,7 @@ public class CommandLine {
 	public void display() {
 		// Section 1
 		System.out.println("Source Files Found:");
-		for( Files file: this.getSourceFiles()) {
+		for( File file: this.getSourceFiles()) {
 			System.out.println(file.getPath());
 		}
 	}
@@ -277,7 +277,7 @@ public class CommandLine {
 	public int hashCode() {
 		int sourceFileHash = 0;
 		
-		for( Files sourceFile: this.getSourceFiles()) {
+		for( File sourceFile: this.getSourceFiles()) {
 			sourceFileHash = sourceFileHash + sourceFile.hashCode() * 11;
 		}
 		

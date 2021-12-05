@@ -48,7 +48,7 @@ public class UnitTestCommandLine {
 		// test containers
 		Vector<File> testFiles = new Vector<File>();
 		Vector<File> fakeFiles = new Vector<File>();
-		Vector<Files> filesList = new Vector<Files>();
+		Vector<File> filesList = new Vector<File>();
 		
 		File pFile = new File("src/test/resources/unitTestCommandLine/properties.ini");
 		propertiesFile propFile = new propertiesFile(pFile);
@@ -71,7 +71,7 @@ public class UnitTestCommandLine {
 		fakeFiles.add(new File(testDir2.getAbsolutePath() + "/trickFile.cpp.o"));
 		
 		for( File file: testFiles) {
-			filesList.add(new Files(file.getAbsolutePath()));
+			filesList.add(file);
 		}
 
 		// run findSourceFiles and check if all files are found
@@ -79,7 +79,7 @@ public class UnitTestCommandLine {
 		cli.setPropertiesFile(propFile);
 		
 		cli.findSourceFiles(dir);
-		for( Files file: filesList) {
+		for( File file: filesList) {
 			assertTrue(cli.getSourceFiles().contains(file));
 		}
 		// check size of container to see if extra files were added
@@ -88,9 +88,9 @@ public class UnitTestCommandLine {
 	
 	@Test
 	public void testAddSourceFiles() {
-		Files source1 = new Files("path1.cpp");
-		Files source2 = new Files("path2.h");
-		Files source3 = new Files("path3.hpp");
+		File source1 = new File("path1.cpp");
+		File source2 = new File("path2.h");
+		File source3 = new File("path3.hpp");
 		CommandLine cli = new CommandLine();
 		cli.addSourceFile(source1);
 		
@@ -153,20 +153,16 @@ public class UnitTestCommandLine {
 		File testDir = new File(dir);
 		File testDir2 = new File(dir2);
 		File testDir3 = new File(dir3);
+		File extraSource = new File(args[2]);
 		
 		Vector<File> testFiles = new Vector<File>();
-		Vector<Files> filesList = new Vector<Files>();
 		
 		testFiles.add(new File(testDir.getAbsolutePath() + "/source1.cpp"));
 		testFiles.add(new File(testDir.getAbsolutePath() + "/source2.C"));
 		testFiles.add(new File(testDir2.getAbsolutePath() + "/header1.h"));
 		testFiles.add(new File(testDir2.getAbsolutePath() + "/header.H"));
 		testFiles.add(new File(testDir3.getAbsolutePath() + "/other.hpp"));
-		testFiles.add(new File(args[2]));
-		
-		for( File file: testFiles) {
-			filesList.add(new Files(file.getAbsolutePath()));
-		}
+		testFiles.add((extraSource.getAbsoluteFile()));
 		
 		CommandLine cli = new CommandLine();
 		
@@ -174,7 +170,7 @@ public class UnitTestCommandLine {
 		
 		assertThat(cli.getNSuggestions(), is(8));
 		assertTrue(cli.getPropertiesFile().equals(propFile));
-		for( Files file: filesList) {
+		for( File file: testFiles) {
 			assertTrue(cli.getSourceFiles().contains(file));
 		}
 		assertThat(cli.getSourceFiles().size(), is(6));
