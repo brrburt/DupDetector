@@ -19,8 +19,6 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - name: Switch Bramch
-      run: |
-      	echo Hello1
-      	echo Hello2
+      run: echo Hello1 echo Hello2
     - name: updateGHPages task
       run: ./gradlew updateGHPages
