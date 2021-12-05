@@ -1,12 +1,13 @@
 package edu.odu.cs.cs350;
 
 import java.io.BufferedReader;
-/*import java.io.File;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;*/
+import java.util.Scanner;
 
 public class DupDetector {
 
@@ -33,6 +34,15 @@ public class DupDetector {
     	else {
     		CommandLine cli = new CommandLine();
     		cli.parseParameters(args);
+    		/* ********* Replace when Lexical Analyzer is ready ********* */
+    		List<Refactoring> refactors = new ArrayList<Refactoring>();
+    		for( File file: cli.getSourceFiles() ) {
+    			refactors.add(new Refactoring(file));
+    		}
+    		for( Refactoring r: refactors) {
+    			cli.addRefactoring(r);
+    		}
+    		/* ********* END OF REPLACEMENT ******** */
     		cli.display();
     	}
     }

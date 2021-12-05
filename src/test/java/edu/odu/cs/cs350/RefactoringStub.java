@@ -2,20 +2,38 @@ package edu.odu.cs.cs350;
 
 import java.io.File;
 
-public class RefactoringStub {
+public class RefactoringStub extends Refactoring{
 
-	private Files sourceFile;
+	private File sourceFile;
 	private int improvement;
 	private TokenStream tokens;
+	private int tokenCount;
 	private int refactorRow;
 	private int refactorColumn;
 	private String fileName; 
 	
-	RefactoringStub() {
+	RefactoringStub(File file) {
 		improvement = 0;
 		refactorRow = 0;
 		refactorColumn = 0;
 		fileName = new String();
+		sourceFile = file;
+	}
+	
+	/** 
+	 * 
+	 * @return int number of tokens in source file
+	 */
+	public int getTokenCount() {
+		return tokenCount;
+	}
+	
+	/**
+	 * 
+	 * sets tokenCount to number of tokens in source file
+	 */
+	public void setTokenCount(int tokens) {
+		tokenCount = tokens;
 	}
 	
 	/**
@@ -79,14 +97,30 @@ public class RefactoringStub {
 	}
 	
 	/**
+	 * 
+	 * @return File source file
+	 */
+	public File getSourceFile() {
+		return sourceFile;
+	}
+	
+	/**
+	 * 
+	 * Set source file
+	 */
+	public void setSourceFile(File file) {
+		sourceFile = file;
+	}
+	
+	/**
 	 * Renders the RefactoringStub object as a string containing all fields
 	 * 
 	 */
 	@Override
 	public String toString() {
 		return "RefactoringStub [Opportunity for Improvement=" + improvement + " Refactor Row =" 
-				+ refactorRow + "," + " Refactor Column=" + refactorColumn + "]" + " File Name = "
-				+ fileName;
+				+ refactorRow + "," + " Refactor Column=" + refactorColumn + " File Name = "
+				+ fileName + "source file= " + sourceFile + "]";
 	}
 	
 	/**

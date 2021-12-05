@@ -31,7 +31,7 @@ public class UnitTestCommandLine {
 	@Test
 	public void testConstructor() {
 		CommandLine cli = new CommandLine();
-		Refactoring ref = new Refactoring();
+		ArrayList<Refactoring> ref = new ArrayList<Refactoring>();
 		propertiesFile file = new propertiesFile();
 		CountTokens tokens = new CountTokens();
 		int suggestions = 5;
@@ -119,14 +119,15 @@ public class UnitTestCommandLine {
 	}
 	
 	@Test
-	public void testSetRefactor() {
-		Refactoring testRefactor = new Refactoring();
+	public void testAddRefactor() {
+		File testFile = new File("src/resources/newFakeSource.C");
+		Refactoring testRefactor = new Refactoring(testFile);
 		
 		
 		CommandLine cli = new CommandLine();
-		cli.setRefactoring(testRefactor);
+		cli.addRefactoring(testRefactor);
 		
-		assertTrue(cli.getRefactoring().equals(testRefactor));
+		assertTrue(cli.getRefactoring().contains(testRefactor));
 	}
 	
 	@Test
@@ -177,6 +178,10 @@ public class UnitTestCommandLine {
 	}
 	
 	@Test
+	/**
+	 * Tests the first section of the display.
+	 * @throws IOException
+	 */
 	public void testDisplay() throws IOException {
 		File expected = new File("src/test/resources/expectedOutput.txt");
 		expected.createNewFile();
@@ -187,6 +192,29 @@ public class UnitTestCommandLine {
                 "src/test/resources/unitTestCommandLine"}; 
 		CommandLine cli = new CommandLine();
 		cli.parseParameters(args);
+		// Generate Refactoring suggestion for use with display.
+		RefactoringStub rStub = new RefactoringStub(cli.getSourceFiles().get(0));
+		RefactoringStub rStub2 = new RefactoringStub(cli.getSourceFiles().get(1));
+		RefactoringStub rStub3 = new RefactoringStub(cli.getSourceFiles().get(2));
+		RefactoringStub rStub4 = new RefactoringStub(cli.getSourceFiles().get(3));
+		RefactoringStub rStub5 = new RefactoringStub(cli.getSourceFiles().get(4));
+		RefactoringStub rStub6 = new RefactoringStub(cli.getSourceFiles().get(5));
+		List<RefactoringStub> rStubs = new ArrayList<RefactoringStub>();
+		rStubs.add(rStub);
+		rStubs.add(rStub2);
+		rStubs.add(rStub3);
+		rStubs.add(rStub4);
+		rStubs.add(rStub5);
+		rStubs.add(rStub6);
+		for( RefactoringStub rs: rStubs) {
+			rs.setTokenCount(0);
+		}
+		cli.addRefactoring(rStub);
+		cli.addRefactoring(rStub2);
+		cli.addRefactoring(rStub3);
+		cli.addRefactoring(rStub4);
+		cli.addRefactoring(rStub5);
+		cli.addRefactoring(rStub6);
 		
 		// Generate expectedOutput.txt contents
 		Vector<File> testFiles = new Vector<File>();
@@ -207,9 +235,10 @@ public class UnitTestCommandLine {
 			absPaths.add(file.getAbsolutePath());
 		}
 		absPaths.sort(null);
-		System.out.println("Source Files Found:");
-		for( String str: absPaths) {
-			System.out.println(str);
+		System.out.println("Files Scanned:");
+		for( RefactoringStub rs: rStubs) {
+			System.out.println("\t" + rs.getSourceFile().getAbsolutePath()
+								+ ", " + rs.getTokenCount());
 		}
 		
 		// Set up output stream to file
@@ -217,23 +246,25 @@ public class UnitTestCommandLine {
 		output.createNewFile();
 		PrintStream oStream2 = new PrintStream(output);
 		System.setOut(oStream2);
-		
+		cli.getRefactoring().add(rStub);
 		cli.display();
 		
 		// Compare expectedOutput.txt and displayOutput.txt 
 		boolean filesEqual = true;
 		Scanner scannerOutput = new Scanner(output);
 		Scanner scannerExpected = new Scanner(expected);
-		while (scannerOutput.hasNext() && scannerExpected.hasNext()) {
+		int count = 0;
+		while (scannerExpected.hasNext() && count < 5) {
 	        String str1 = scannerOutput.next();
 	        String str2 = scannerExpected.next();
+	        count++;
 	        if (!str1.equals(str2))
 	            filesEqual = false;
 	    }
 		scannerOutput.close();
 		scannerExpected.close();
-		output.delete();
-		expected.delete();
+		//output.delete();
+		//expected.delete();
 		
 		assertTrue(filesEqual);
 	} 

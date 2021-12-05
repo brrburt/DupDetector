@@ -18,7 +18,7 @@ public class CommandLine {
 	
 	private List<File> sourceFiles;
 	private propertiesFile pFile;
-	private Refactoring refactor;
+	private List<Refactoring> refactor;
 	private CountTokens tokenizer;
 	private int nSuggestions;
 	
@@ -31,7 +31,7 @@ public class CommandLine {
 	CommandLine() {
 		sourceFiles = new ArrayList<File>();
 		pFile = new propertiesFile();
-		refactor = new Refactoring();
+		refactor = new ArrayList<Refactoring>();
 		tokenizer = new CountTokens();
 		nSuggestions = 5;
 	}
@@ -80,12 +80,16 @@ public class CommandLine {
 	 * retrieve the Refactoring object
 	 * @return refactor Refactoring object
 	 */
-	public Refactoring getRefactoring( ) {
+	public List<Refactoring> getRefactoring( ) {
 		return refactor;
 	}
 	
-	public void setRefactoring(Refactoring refactoring) {
-		refactor = refactoring;
+	public void addRefactoring(Refactoring refactoring) {
+		//if (!(refactor.contains(refactoring))) {
+			refactor.add(refactoring);
+		//}
+		
+		//refactor.sort(null);
 	}
 	
 	public void setNSuggestions(int number) {
@@ -155,14 +159,13 @@ public class CommandLine {
 			this.getPropertiesFile().readPropertyFile();
 		}
 		
-		
 		// Get files/directories
 		for (int argsIndex = 2; argsIndex < args.length; argsIndex++)
 		{
 			this.findSourceFiles(args[argsIndex]);
 		}
-		
 	}
+	
 	/**
 	 * Called by parseParameters, take command line argument and searches 
 	 * for source files to add to list of source files.
@@ -236,9 +239,10 @@ public class CommandLine {
 	 */
 	public void display() {
 		// Section 1
-		System.out.println("Source Files Found:");
-		for( File file: this.getSourceFiles()) {
-			System.out.println(file.getPath());
+		System.out.println("Files Scanned:");
+		for( Refactoring r: refactor) {
+			System.out.println("\t" + r.getSourceFile().getAbsolutePath() +
+								   ", " + r.getTokenCount());
 		}
 	}
 	
@@ -283,5 +287,4 @@ public class CommandLine {
 		
 		return sourceFileHash + pFile.hashCode() * 13 + refactor.hashCode() * 17;
 	}
-	
 }
