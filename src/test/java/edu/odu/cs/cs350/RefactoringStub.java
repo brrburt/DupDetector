@@ -1,10 +1,12 @@
 package edu.odu.cs.cs350;
 
-
+import java.io.File;
 
 public class RefactoringStub {
 
+	private Files sourceFile;
 	private int improvement;
+	private TokenStream tokens;
 	private int refactorRow;
 	private int refactorColumn;
 	private String fileName; 
@@ -14,6 +16,56 @@ public class RefactoringStub {
 		refactorRow = 0;
 		refactorColumn = 0;
 		fileName = new String();
+	}
+	
+	/**
+	 * 
+	 * 
+	 * @return int Strating row of refactor suggestion
+	 */
+	public int getRefactorRow() {
+		return refactorRow;
+	}
+	
+	/**
+	 * 
+	 * 
+	 * @return int Starting Column of refactor suggestion
+	 */
+	public int getRefactorColumn() {
+		return refactorColumn;
+	}
+	
+	/**
+	 * 
+	 * Set Starting row for refactoring suggestion
+	 */
+	public void setRefactorRow(int startRow) {
+		refactorRow = startRow;
+	}
+	
+	/**
+	 * 
+	 * Set starting column for refactoring suggestion
+	 */
+	public void setRefactorColumn(int startCol) {
+		refactorColumn = startCol;
+	}
+	
+	/**
+	 * 
+	 * @return TokenStream list of found tokens for source file
+	 */
+	public TokenStream getTokens() {
+		return tokens;
+	}
+	
+	/**
+	 * 
+	 * Set List of tokens for source file
+	 */
+	public void setTokens(TokenStream t) {
+		tokens = t;
 	}
 	
 	@Override 
