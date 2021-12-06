@@ -8,6 +8,7 @@ import java.util.Vector;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.nio.file.FileSystemLoopException;
 
 /*
 // @author cs_alee035
@@ -151,18 +152,33 @@ public class CommandLine {
 		// Get nSuggestions
 		this.setNSuggestions(Integer.parseInt(args[0]));
 		
-		if(args.length > 1) {
+		if(args.length > 1 && args[1].endsWith(".ini")) {
 			// Get property file
 			File pFile = new File(args[1]);
 			propertiesFile propFile = new propertiesFile(pFile);
 			this.setPropertiesFile(propFile);
 			this.getPropertiesFile().readPropertyFile();
+			
+			// Get files/directories
+			for (int argsIndex = 2; argsIndex < args.length; argsIndex++)
+			{
+				this.findSourceFiles(args[argsIndex]);
+			}
 		}
-		
-		// Get files/directories
-		for (int argsIndex = 2; argsIndex < args.length; argsIndex++)
-		{
-			this.findSourceFiles(args[argsIndex]);
+		else {
+			// Set property file with default values
+			propertiesFile propFile = new propertiesFile();
+			this.setPropertiesFile(propFile);
+			
+	        List<String> extensions = List.of("cpp","h");
+	        this.getPropertiesFile().setfileExtensions(extensions);
+	        this.getPropertiesFile().setminSequnces("10");
+	        this.getPropertiesFile().setmaxDubs("8");
+			
+			for (int argsIndex = 1; argsIndex < args.length; argsIndex++)
+			{
+				this.findSourceFiles(args[argsIndex]);
+			}
 		}
 	}
 	
