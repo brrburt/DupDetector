@@ -13,19 +13,19 @@ public class DupDetector {
 
     public static void main(String[] args) throws Exception
     {
-        /**
+    	/**
          * Check for errors before going further
          * 
-         * 1. Check if a help flag was used
-         * 2. Ensure two or more parameters were given
+         * 1. Ensure that a parameter was given
+         * 2. Check if a help flag was used
          * 3. Ensure that args[0] is an int (nSuggestions)
          */
-    	if(args[0].equals("-h") || args[0].equals("--help")) {
-    		PrintUsage();
-    	}
-    	else if(args.length < 2) {
+    	if(args.length == 0) {
     		System.out.println("DupDetector: None or too few arguments");
     		System.out.println("Type 'DupDetector --help' for usage information.");
+    	}
+    	else if(args[0].equals("-h") || args[0].equals("--help")) {
+    		PrintUsage();
     	}
     	else if(!TryStringToInt(args[0])) {
     		System.out.println("DupDetector: nSuggestions must be an integer");
