@@ -208,7 +208,6 @@ public class UnitTestCommandLine {
 		rStubs.add(rStub6);
 		for( RefactoringStub rs: rStubs) {
 			rs.setTokenCount(0);
-			rs.setValidSuggestion();
 		}
 		cli.addRefactoring(rStub);
 		cli.addRefactoring(rStub2);
@@ -271,8 +270,8 @@ public class UnitTestCommandLine {
 	    }
 		scannerOutput.close();
 		scannerExpected.close();
-		//output.delete();
-		//expected.delete();
+		output.delete();
+		expected.delete();
 		
 		assertTrue(filesEqual);
 	} 

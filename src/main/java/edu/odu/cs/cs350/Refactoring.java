@@ -1,7 +1,7 @@
 package edu.odu.cs.cs350;
 
 import java.io.File;
-
+import java.util.Vector;
 public class Refactoring {
 
 	private File sourceFile;
@@ -11,7 +11,7 @@ public class Refactoring {
 	private int refactorTokens;
 	private int refactorRow;
 	private int refactorColumn;
-	private boolean validSuggestion;
+	private Vector<Character> replacements;
 	private String fileName; 
 	
 	Refactoring() {
@@ -19,8 +19,7 @@ public class Refactoring {
 		refactorRow = 0;
 		refactorColumn = 0;
 		tokenCount = 0;
-		fileName = new String();
-		validSuggestion = false;
+		replacements = new Vector<Character>();
 	}
 	
 	Refactoring(File file) {
@@ -29,7 +28,23 @@ public class Refactoring {
 		refactorColumn = 0;
 		fileName = new String();
 		sourceFile = file;
-		validSuggestion = false;
+		replacements = new Vector<Character>();
+	}
+	
+	/**
+	 * 
+	 * @return String suggested lexemes for replacement
+	 */
+	public Vector<Character> getReplacements() {
+		return replacements;
+	}
+	
+	/**
+	 * 
+	 * Set string of lexeme replacement suggestions for suggestion
+	 */
+	public void setReplacements(Vector<Character> replace) {
+		replacements = replace;
 	}
 	
 	/** 
@@ -51,7 +66,7 @@ public class Refactoring {
 	/**
 	 * 
 	 * 
-	 * @return int Strating row of refactor suggestion
+	 * @return int Starting row of refactor suggestion
 	 */
 	public int getRefactorRow() {
 		return refactorRow;
@@ -129,18 +144,6 @@ public class Refactoring {
 	 */
 	public void setImprovement(int value) {
 		improvement = value;
-	}
-	
-	/**
-	 * 
-	 * Set this Refactor as a valid refactor suggestion
-	 */
-	public void setValidSuggestion() {
-		validSuggestion = true;
-	}
-	
-	public boolean getValidSuggestion() {
-		return validSuggestion;
 	}
 	
 	@Override 

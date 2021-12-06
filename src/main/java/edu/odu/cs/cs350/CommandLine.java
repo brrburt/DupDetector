@@ -247,7 +247,7 @@ public class CommandLine {
 		System.out.println();
 		int refactorCount = 0;
 		for( Refactoring r: this.getRefactoring()) {
-			if(r.getValidSuggestion() && refactorCount < this.getNSuggestions()) {
+			if(refactorCount < this.getNSuggestions()) {
 				refactorCount++;
 				System.out.println("Opportunity " + r.getImprovement() +
 						", " + r.getRefactorTokens() + " tokens");
