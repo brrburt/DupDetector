@@ -3,20 +3,18 @@ package edu.odu.cs.cs350;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.*;  
+import java.util.Scanner; 
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.not;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
-import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
-import java.io.IOException;
+
 public class UnitTestTokenStream 
 {
     
@@ -46,7 +44,7 @@ public final void testFunction()
         String content = " ";
         while(scan.hasNext())
         {
-            content += scan.nextLine() +"\n";
+            content += scan.nextLine();
         }
         scan.close();
         ArrayList <Tokens> tokens = new ArrayList<Tokens>();
@@ -71,15 +69,18 @@ public final void testFunction()
         to = tokens.get(4);
         assertThat(TokenName.NAMESPACE, equalTo(to.getTokenType()));
         assertEquals("", to.getLocation());
-        assertEquals("3",  to.getLine());
-        assertEquals("7", to.getColumn());
+        assertEquals("1",  to.getLine());
+        assertEquals("28", to.getColumn());
 
+        to = tokens.get(8);
+        assertThat(TokenName.INT, equalTo(to.getTokenType()));
+        assertEquals("1", to.getLine());
+        assertEquals("45",to.getColumn());
 
+        to = tokens.get(10);
+        assertThat(TokenName.LPAREN, equalTo(to.getTokenType()));
+        assertThat(to.getLocation(), equalTo(""));
 
-        
-      
-
-    
 
     
     System.out.println(tokens);
