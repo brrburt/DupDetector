@@ -18,32 +18,46 @@ public class DupDetector {
          * 
          * 1. Ensure that a parameter was given
          * 2. Check if a help flag was used
-         * 3. Ensure that args[0] is an int (nSuggestions)
+         * 3. Check if more than one parameter was given
+         * 4. Ensure that args[0] is an int (nSuggestions)
+         * 5. Ensure that args[1] is a string (file path)
          */
     	if(args.length == 0) {
     		System.out.println("DupDetector: None or too few arguments");
     		System.out.println("Type 'DupDetector --help' for usage information.");
     	}
-    	else if(args[0].equals("-h") || args[0].equals("--help")) {
-    		PrintUsage();
-    	}
-    	else if(!TryStringToInt(args[0])) {
-    		System.out.println("DupDetector: nSuggestions must be an integer");
-    		System.out.println("Type 'DupDetector --help' for usage information.");
+    	else if(args.length == 1) {
+	    	if(args[0].equals("-h") || args[0].equals("--help")) {
+	    		PrintUsage();
+	    	}
+	    	else {
+	    		System.out.println("DupDetector: None or too few arguments");
+	    		System.out.println("Type 'DupDetector --help' for usage information.");
+	    	}	
     	}
     	else {
-    		CommandLine cli = new CommandLine();
-    		cli.parseParameters(args);
-    		/* ********* Replace when Lexical Analyzer is ready ********* */
-    		List<Refactoring> refactors = new ArrayList<Refactoring>();
-    		for( File file: cli.getSourceFiles() ) {
-    			refactors.add(new Refactoring(file));
-    		}
-    		for( Refactoring r: refactors) {
-    			cli.addRefactoring(r);
-    		}
-    		/* ********* END OF REPLACEMENT ******** */
-    		cli.display();
+	    	if(!TryStringToInt(args[0])) {
+	    		System.out.println("DupDetector: nSuggestions must be an integer");
+	    		System.out.println("Type 'DupDetector --help' for usage information.");
+	    	}
+	    	else if (TryStringToInt(args[1])) {
+	    		System.out.println("DupDetector: paths must be strings");
+	    		System.out.println("Type 'DupDetector --help' for usage information.");
+	    	}
+	    	else {
+	    		CommandLine cli = new CommandLine();
+	    		cli.parseParameters(args);
+	    		/* ********* Replace when Lexical Analyzer is ready ********* */
+	    		List<Refactoring> refactors = new ArrayList<Refactoring>();
+	    		for( File file: cli.getSourceFiles() ) {
+	    			refactors.add(new Refactoring(file));
+	    		}
+	    		for( Refactoring r: refactors) {
+	    			cli.addRefactoring(r);
+	    		}
+	    		/* ********* END OF REPLACEMENT ******** */
+	    		cli.display();
+	    	}
     	}
     }
  

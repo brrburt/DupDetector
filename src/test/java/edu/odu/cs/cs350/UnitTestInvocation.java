@@ -30,6 +30,7 @@ public class UnitTestInvocation extends DupDetector {
 	String[] arg4 = {"-help"};
 	String[] arg5 = {"forty", "two"};
 	String[] arg6 = {"42"};
+	String[] arg7 = {"10", "10"};
 	
 	@BeforeEach
 	public void setOutputStream()
@@ -120,6 +121,20 @@ public class UnitTestInvocation extends DupDetector {
 		CommandLine cli = new CommandLine();
 		cli.parseParameters(arg6);
 		assertThat(cli.getNSuggestions(), equalTo(42));
+	}
+	
+	@Test
+	public void testPaths()
+	{
+		// Test that the second parameter given through the commandline is a string
+		try {
+			main(arg7);
+			assertTrue(output.toString().contains("paths must be strings"));
+			assertFalse(output.toString().contains("None or too few arguments"));
+		}
+		catch(Exception e) {
+			fail("Exception thrown");
+		}
 	}
 	
 	@AfterEach
